@@ -73,27 +73,35 @@ wait_onos() {
   local i
   say "waiting for ONOS REST at $ONOS_BASE ..."
   for i in $(seq 1 60); do
-    if curl -sS -m 10 -u "$ONOS_AUTH" "$ONOS_BASE/devices" >/dev/null 2>&1; then return 0; fi
+    if curl -sS -m 10 -f -u "$ONOS_AUTH" "$ONOS_BASE/devices" >/dev/null 2>&1; then return 0; fi
     sleep 5
   done
   die "ONOS REST API did not come up within 5 minutes"
 }
 
 activate_onos() {
-  local app
-  for app in openflow-base openflow fwd; do
-    curl -sS -m 10 -u "$ONOS_AUTH" -X POST \
-      "$ONOS_BASE/applications/org.onosproject.$app/active" >/dev/null
-  done
-  sleep 5
-  curl -sS -m 10 -u "$ONOS_AUTH" "$ONOS_BASE/applications" | python3 -c '
+  local app try
+  for try in $(seq 1 24); do          # up to 4 min: ONOS warm-up is ~90 s on first boot
+    for app in openflow-base openflow fwd; do
+      curl -sS -m 10 -u "$ONOS_AUTH" -X POST \
+        "$ONOS_BASE/applications/org.onosproject.$app/active" >/dev/null 2>&1 || true
+    done
+    sleep 10
+    if curl -sS -m 10 -u "$ONOS_AUTH" "$ONOS_BASE/applications" 2>/dev/null | python3 -c '
 import sys, json
-apps = {a["name"]: a["state"] for a in json.load(sys.stdin)["applications"]}
+try:
+    apps = {a["name"]: a["state"] for a in json.load(sys.stdin)["applications"]}
+except Exception:
+    sys.exit(1)
 missing = [a for a in ("openflow-base", "openflow", "fwd")
            if apps.get("org.onosproject." + a) != "ACTIVE"]
 sys.exit(1 if missing else 0)
-' || die "ONOS applications did not reach ACTIVE state"
-  ok "ONOS apps active (openflow-base, openflow, fwd)"
+'; then
+      ok "ONOS apps active (openflow-base, openflow, fwd)"
+      return 0
+    fi
+  done
+  die "ONOS applications did not reach ACTIVE state"
 }
 
 restart_onos() {   # required before every family and every switch_failure run

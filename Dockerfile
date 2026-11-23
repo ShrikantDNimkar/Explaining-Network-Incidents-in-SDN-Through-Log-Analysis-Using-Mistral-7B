@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # ---- Mininet 2.3.0 from source (no controllers; ONOS runs in its own container)
 RUN git clone --depth 1 -b 2.3.0 https://github.com/mininet/mininet.git /tmp/mininet \
     && cd /tmp/mininet \
-    && ./util/install.sh -n \
+    && apt-get update && ./util/install.sh -n \
     && rm -rf /tmp/mininet
 
 # ---- lab user (course-lab workflow: ssh -p 2222 mininet@localhost) -----------
