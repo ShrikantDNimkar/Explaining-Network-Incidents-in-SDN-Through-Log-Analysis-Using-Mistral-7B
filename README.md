@@ -18,12 +18,10 @@ raw and on structured evidence.
    ships the Open vSwitch datapath the emulation needs; no custom kernel is
    required on native Linux. 8 GB RAM is enough unless you also run the CPU
    Mistral calls on the same machine (then 16 GB is comfortable).
-2. Copy the project package `group11_sdn_mistral_project_v4` (provided by the
-   team) into the `project/` folder of this package, so that `project/`
-   directly contains `run_experiment.py`, `mistral_explain.py`, etc.
-   If you also want to replay the recorded evidence without running the
-   campaign yourself, copy the `runs/` directory of the completed project
-   into `project/runs/`.
+2. Nothing else to copy: this repository already contains the project
+   scripts in `project/` and the recorded 30-run evidence in `project/runs/`,
+   so `analysis` replays the recorded evidence out of the box. You only
+   need `experiment` if you want to re-run the campaign yourself.
 3. Ollama (the LLM server for Mistral 7B) is provisioned **automatically**:
    when a mode needs it and it is missing, the launcher installs it, sets
    `OLLAMA_HOST=0.0.0.0`, and pulls the `mistral` model. You can also do it
@@ -70,8 +68,9 @@ All outputs land in `project/runs/`:
 
 - `evaluation_summary.csv` - per-run metrics and per-condition averages
 - `experiment_matrix.json` - ground truth of the 30 runs
-- `<scenario>_r*/` - raw evidence, incident records, and the two Mistral
-  explanation files per run
+- `<scenario>_r*/` - raw evidence, incident records, and the three
+  explanation files per run (`baseline.json`, `mistral_raw.json`,
+  `mistral_structured.json`)
 - `rubric_human_template.csv` - the joint human rubric (90 rows); it is the
   one manual step and cannot be automated. After filling it, re-run
   `./group11 experiment` (or `./group11 shell` then `python3 evaluate.py`)
@@ -88,13 +87,12 @@ Reference results from the project report:
 ## Package contents
 
 ```
-group11-docker-package/
-  README.md            this file
-  Dockerfile           lab image: ubuntu:20.04, Mininet 2.3.0, OVS, docker CLI, iperf, sshd:2222
-  entrypoint.sh        lab container entrypoint (module load, OVS start, sshd)
-  docker-compose.yml   ONOS (10.0.0.10) + privileged sdn-lab (10.0.0.20) on sdn-net
-  group11              one-command launcher (all modes)
-  project/             the project scripts go here (see preparation step 2)
+README.md            this file
+Dockerfile           lab image: ubuntu:20.04, Mininet 2.3.0, OVS, docker CLI, iperf, sshd:2222
+entrypoint.sh        lab container entrypoint (module load, OVS start, sshd)
+docker-compose.yml   ONOS (10.0.0.10) + privileged sdn-lab (10.0.0.20) on sdn-net
+group11              one-command launcher (all modes)
+project/             project scripts, recorded 30-run evidence and results
 ```
 
 ## Troubleshooting
@@ -107,6 +105,7 @@ group11-docker-package/
 | Mistral calls very slow | normal on CPU (about 2-8 min per call); the iGPU on the reference laptop could not accelerate it either. |
 | Results owned by root | the lab container runs as root; inspect with `sudo` or `sudo chown -R $USER project/runs` afterwards. |
 | Running under WSL2 | stock WSL2 kernels lack Open vSwitch entirely; use a custom WSL2 kernel as documented in the project report, then run this package inside it. |
+| `docker compose` reports "not a docker command" | on Debian/Kali install the `docker-compose` package (Compose v2) and register it: `sudo ln -s /usr/bin/docker-compose /usr/local/lib/docker/cli-plugins/docker-compose`. On Ubuntu the package is `docker-compose-v2`. |
 
 ## Security notes
 
