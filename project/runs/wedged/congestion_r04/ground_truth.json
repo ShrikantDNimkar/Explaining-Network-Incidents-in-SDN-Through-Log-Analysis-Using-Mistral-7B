@@ -1,0 +1,26 @@
+{
+  "run_id": "congestion_r04",
+  "scenario": "congestion",
+  "injected_action": "netem delay=200ms loss=10% on s1-eth4",
+  "variant": {
+    "intf": "s1-eth4",
+    "delay_ms": 200,
+    "loss_pct": 10
+  },
+  "inject_time": "2026-11-16T00:42:37.220Z",
+  "restore_time": "2026-11-16T00:43:36.708Z",
+  "observed_outcome": {
+    "recovered_after_restore": false,
+    "baseline_loss_pct": [
+      100.0,
+      100.0
+    ],
+    "post_inject_loss_pct": [
+      100.0,
+      100.0
+    ]
+  },
+  "affected_nodes": [
+    "s1"
+  ]
+}

@@ -1,0 +1,231 @@
+# captured 2026-11-16T14:00:27.189Z phase baseline
+
+===== ovs_vsctl_show =====
+eefa7031-4c28-44b3-bf66-ac7641c14e8a
+    Bridge s3
+        Controller "tcp:10.0.0.10:6653"
+            is_connected: true
+        fail_mode: secure
+        Port s3-eth2
+            Interface s3-eth2
+        Port s3-eth1
+            Interface s3-eth1
+        Port s3-eth4
+            Interface s3-eth4
+        Port s3-eth3
+            Interface s3-eth3
+        Port s3
+            Interface s3
+                type: internal
+    Bridge s2
+        Controller "tcp:10.0.0.10:6653"
+            is_connected: true
+        fail_mode: secure
+        Port s2-eth3
+            Interface s2-eth3
+        Port s2
+            Interface s2
+                type: internal
+        Port s2-eth2
+            Interface s2-eth2
+        Port s2-eth4
+            Interface s2-eth4
+        Port s2-eth1
+            Interface s2-eth1
+    Bridge s1
+        Controller "tcp:10.0.0.10:6653"
+            is_connected: true
+        fail_mode: secure
+        Port s1-eth3
+            Interface s1-eth3
+        Port s1-eth1
+            Interface s1-eth1
+        Port s1-eth2
+            Interface s1-eth2
+        Port s1
+            Interface s1
+                type: internal
+    Bridge s4
+        Controller "tcp:10.0.0.10:6653"
+            is_connected: true
+        fail_mode: secure
+        Port s4-eth3
+            Interface s4-eth3
+        Port s4
+            Interface s4
+                type: internal
+        Port s4-eth1
+            Interface s4-eth1
+        Port s4-eth2
+            Interface s4-eth2
+    ovs_version: "2.13.8"
+
+
+===== flows_s1 =====
+OFPST_FLOW reply (OF1.3) (xid=0x2):
+ cookie=0x10000021b41dc, duration=24.817s, table=0, n_packets=13, n_bytes=1274, send_flow_rem priority=5,ip actions=CONTROLLER:65535,clear_actions
+ cookie=0x100007a585b6f, duration=24.816s, table=0, n_packets=14, n_bytes=1946, send_flow_rem priority=40000,dl_type=0x8942 actions=CONTROLLER:65535,clear_actions
+ cookie=0x10000ea6f4b8e, duration=24.816s, table=0, n_packets=22, n_bytes=924, send_flow_rem priority=40000,arp actions=CONTROLLER:65535,clear_actions
+ cookie=0x100009465555a, duration=24.815s, table=0, n_packets=14, n_bytes=1946, send_flow_rem priority=40000,dl_type=0x88cc actions=CONTROLLER:65535,clear_actions
+ cookie=0x42000032ad8e9f, duration=0.767s, table=0, n_packets=2, n_bytes=196, send_flow_rem priority=10,in_port=2,dl_src=a6:14:93:cc:9d:a9,dl_dst=5e:0d:2f:6a:95:a3 actions=output:1
+ cookie=0x4200000a4be5f0, duration=0.751s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=1,dl_src=5e:0d:2f:6a:95:a3,dl_dst=3a:2b:0f:ba:95:01 actions=output:2
+ cookie=0x4200001aacbb77, duration=0.735s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=2,dl_src=3a:2b:0f:ba:95:01,dl_dst=5e:0d:2f:6a:95:a3 actions=output:1
+ cookie=0x420000f3a80013, duration=0.716s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=1,dl_src=5e:0d:2f:6a:95:a3,dl_dst=f2:05:20:ff:a6:a8 actions=output:3
+ cookie=0x42000084ec6ae5, duration=0.707s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=3,dl_src=f2:05:20:ff:a6:a8,dl_dst=5e:0d:2f:6a:95:a3 actions=output:1
+ cookie=0x420000cab86c7f, duration=0.690s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=1,dl_src=5e:0d:2f:6a:95:a3,dl_dst=ba:73:80:41:6c:25 actions=output:2
+ cookie=0x4200006712d7bc, duration=0.683s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=2,dl_src=ba:73:80:41:6c:25,dl_dst=5e:0d:2f:6a:95:a3 actions=output:1
+ cookie=0x420000462201c6, duration=0.666s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=1,dl_src=5e:0d:2f:6a:95:a3,dl_dst=d2:2e:b7:59:da:1c actions=output:2
+ cookie=0x420000b68c5f94, duration=0.653s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=2,dl_src=d2:2e:b7:59:da:1c,dl_dst=5e:0d:2f:6a:95:a3 actions=output:1
+ cookie=0x420000879a770a, duration=0.649s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=1,dl_src=5e:0d:2f:6a:95:a3,dl_dst=a6:14:93:cc:9d:a9 actions=output:2
+ cookie=0x420000dd310e2e, duration=0.588s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=3,dl_src=f2:05:20:ff:a6:a8,dl_dst=a6:14:93:cc:9d:a9 actions=output:2
+ cookie=0x4200002b0a2c44, duration=0.453s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=3,dl_src=f2:05:20:ff:a6:a8,dl_dst=ba:73:80:41:6c:25 actions=output:2
+
+
+===== ports_s1 =====
+OFPST_PORT reply (OF1.3) (xid=0x2): 4 ports
+  port LOCAL: rx pkts=0, bytes=0, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=0, bytes=0, drop=0, errs=0, coll=0
+           duration=26.017s
+  port  1: rx pkts=23, bytes=1846, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=53, bytes=4908, drop=0, errs=0, coll=0
+           duration=26.021s
+  port  2: rx pkts=48, bytes=4586, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=46, bytes=4670, drop=0, errs=0, coll=0
+           duration=26.021s
+  port  3: rx pkts=36, bytes=3914, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=43, bytes=4040, drop=0, errs=0, coll=0
+           duration=26.021s
+
+
+===== flows_s2 =====
+OFPST_FLOW reply (OF1.3) (xid=0x2):
+ cookie=0x10000dc56d70b, duration=24.835s, table=0, n_packets=14, n_bytes=1946, send_flow_rem priority=40000,dl_type=0x8942 actions=CONTROLLER:65535,clear_actions
+ cookie=0x100002341485c, duration=24.835s, table=0, n_packets=24, n_bytes=2352, send_flow_rem priority=5,ip actions=CONTROLLER:65535,clear_actions
+ cookie=0x1000002bbd8d4, duration=24.835s, table=0, n_packets=14, n_bytes=1946, send_flow_rem priority=40000,dl_type=0x88cc actions=CONTROLLER:65535,clear_actions
+ cookie=0x10000c70edd85, duration=24.835s, table=0, n_packets=27, n_bytes=1134, send_flow_rem priority=40000,arp actions=CONTROLLER:65535,clear_actions
+ cookie=0x420000d35b0e93, duration=0.787s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=3,dl_src=5e:0d:2f:6a:95:a3,dl_dst=a6:14:93:cc:9d:a9 actions=output:1
+ cookie=0x4200009f125c6c, duration=0.787s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=4,dl_src=5e:0d:2f:6a:95:a3,dl_dst=a6:14:93:cc:9d:a9 actions=output:1
+ cookie=0x4200001cac1eca, duration=0.779s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=1,dl_src=a6:14:93:cc:9d:a9,dl_dst=5e:0d:2f:6a:95:a3 actions=output:3
+ cookie=0x420000cf1807e2, duration=0.767s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=3,dl_src=5e:0d:2f:6a:95:a3,dl_dst=3a:2b:0f:ba:95:01 actions=output:4
+ cookie=0x4200002a77c803, duration=0.752s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=4,dl_src=3a:2b:0f:ba:95:01,dl_dst=5e:0d:2f:6a:95:a3 actions=output:3
+ cookie=0x4200004e481032, duration=0.704s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=3,dl_src=5e:0d:2f:6a:95:a3,dl_dst=ba:73:80:41:6c:25 actions=output:2
+ cookie=0x420000b9a6a190, duration=0.702s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=2,dl_src=ba:73:80:41:6c:25,dl_dst=5e:0d:2f:6a:95:a3 actions=output:3
+ cookie=0x4200004ab022b1, duration=0.682s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=3,dl_src=5e:0d:2f:6a:95:a3,dl_dst=d2:2e:b7:59:da:1c actions=output:4
+ cookie=0x42000002bcf10e, duration=0.671s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=4,dl_src=d2:2e:b7:59:da:1c,dl_dst=5e:0d:2f:6a:95:a3 actions=output:3
+ cookie=0x420000bfd4ac00, duration=0.650s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=1,dl_src=a6:14:93:cc:9d:a9,dl_dst=3a:2b:0f:ba:95:01 actions=output:4
+ cookie=0x4200009481e62e, duration=0.638s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=4,dl_src=3a:2b:0f:ba:95:01,dl_dst=a6:14:93:cc:9d:a9 actions=output:1
+ cookie=0x4200003e88bc28, duration=0.619s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=1,dl_src=a6:14:93:cc:9d:a9,dl_dst=f2:05:20:ff:a6:a8 actions=output:4
+ cookie=0x420000c4ed3909, duration=0.603s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=3,dl_src=f2:05:20:ff:a6:a8,dl_dst=a6:14:93:cc:9d:a9 actions=output:1
+ cookie=0x4200001f013ecc, duration=0.594s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=1,dl_src=a6:14:93:cc:9d:a9,dl_dst=ba:73:80:41:6c:25 actions=output:2
+ cookie=0x42000036fb10d4, duration=0.589s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=2,dl_src=ba:73:80:41:6c:25,dl_dst=a6:14:93:cc:9d:a9 actions=output:1
+ cookie=0x4200002ab59fa1, duration=0.573s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=1,dl_src=a6:14:93:cc:9d:a9,dl_dst=d2:2e:b7:59:da:1c actions=output:4
+ cookie=0x420000386b1099, duration=0.569s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=4,dl_src=d2:2e:b7:59:da:1c,dl_dst=a6:14:93:cc:9d:a9 actions=output:1
+ cookie=0x420000cbf9c53d, duration=0.521s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=4,dl_src=3a:2b:0f:ba:95:01,dl_dst=ba:73:80:41:6c:25 actions=output:2
+ cookie=0x420000f787872c, duration=0.518s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=2,dl_src=ba:73:80:41:6c:25,dl_dst=3a:2b:0f:ba:95:01 actions=output:4
+ cookie=0x420000b39310c0, duration=0.468s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=3,dl_src=f2:05:20:ff:a6:a8,dl_dst=ba:73:80:41:6c:25 actions=output:2
+ cookie=0x42000013391af0, duration=0.466s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=2,dl_src=ba:73:80:41:6c:25,dl_dst=f2:05:20:ff:a6:a8 actions=output:4
+ cookie=0x4200008dd58a9a, duration=0.401s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=2,dl_src=ba:73:80:41:6c:25,dl_dst=d2:2e:b7:59:da:1c actions=output:4
+ cookie=0x4200000be2abb0, duration=0.356s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=4,dl_src=d2:2e:b7:59:da:1c,dl_dst=ba:73:80:41:6c:25 actions=output:2
+
+
+===== ports_s2 =====
+OFPST_PORT reply (OF1.3) (xid=0x2): 5 ports
+  port LOCAL: rx pkts=0, bytes=0, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=0, bytes=0, drop=0, errs=0, coll=0
+           duration=25.980s
+  port  1: rx pkts=24, bytes=1944, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=52, bytes=4866, drop=0, errs=0, coll=0
+           duration=26.023s
+  port  4: rx pkts=48, bytes=4810, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=57, bytes=5356, drop=0, errs=0, coll=0
+           duration=26.024s
+  port  2: rx pkts=23, bytes=1846, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=52, bytes=4810, drop=0, errs=0, coll=0
+           duration=26.023s
+  port  3: rx pkts=46, bytes=4670, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=48, bytes=4586, drop=0, errs=0, coll=0
+           duration=26.024s
+
+
+===== flows_s3 =====
+OFPST_FLOW reply (OF1.3) (xid=0x2):
+ cookie=0x10000a6288ee9, duration=24.846s, table=0, n_packets=42, n_bytes=1764, send_flow_rem priority=40000,arp actions=CONTROLLER:65535,clear_actions
+ cookie=0x10000646f55aa, duration=24.846s, table=0, n_packets=14, n_bytes=1946, send_flow_rem priority=40000,dl_type=0x88cc actions=CONTROLLER:65535,clear_actions
+ cookie=0x10000464e5575, duration=24.846s, table=0, n_packets=14, n_bytes=1946, send_flow_rem priority=40000,dl_type=0x8942 actions=CONTROLLER:65535,clear_actions
+ cookie=0x10000be641e06, duration=24.846s, table=0, n_packets=21, n_bytes=2058, send_flow_rem priority=5,ip actions=CONTROLLER:65535,clear_actions
+ cookie=0x420000b617a476, duration=0.803s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=4,dl_src=5e:0d:2f:6a:95:a3,dl_dst=a6:14:93:cc:9d:a9 actions=output:3
+ cookie=0x420000255da4c8, duration=0.777s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=3,dl_src=5e:0d:2f:6a:95:a3,dl_dst=3a:2b:0f:ba:95:01 actions=output:1
+ cookie=0x420000bdbfec4f, duration=0.769s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=1,dl_src=3a:2b:0f:ba:95:01,dl_dst=5e:0d:2f:6a:95:a3 actions=output:3
+ cookie=0x42000035de93d8, duration=0.695s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=3,dl_src=5e:0d:2f:6a:95:a3,dl_dst=d2:2e:b7:59:da:1c actions=output:2
+ cookie=0x4200001153581e, duration=0.689s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=2,dl_src=d2:2e:b7:59:da:1c,dl_dst=5e:0d:2f:6a:95:a3 actions=output:3
+ cookie=0x42000043cbe68c, duration=0.662s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=3,dl_src=a6:14:93:cc:9d:a9,dl_dst=3a:2b:0f:ba:95:01 actions=output:1
+ cookie=0x4200006a8d00d8, duration=0.654s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=1,dl_src=3a:2b:0f:ba:95:01,dl_dst=a6:14:93:cc:9d:a9 actions=output:3
+ cookie=0x420000576715d7, duration=0.632s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=3,dl_src=a6:14:93:cc:9d:a9,dl_dst=f2:05:20:ff:a6:a8 actions=output:4
+ cookie=0x420000572fc27e, duration=0.587s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=3,dl_src=a6:14:93:cc:9d:a9,dl_dst=d2:2e:b7:59:da:1c actions=output:2
+ cookie=0x420000c38ac4ea, duration=0.585s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=2,dl_src=d2:2e:b7:59:da:1c,dl_dst=a6:14:93:cc:9d:a9 actions=output:3
+ cookie=0x4200002ac50039, duration=0.562s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=1,dl_src=3a:2b:0f:ba:95:01,dl_dst=f2:05:20:ff:a6:a8 actions=output:4
+ cookie=0x4200008221c7dd, duration=0.553s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=4,dl_src=f2:05:20:ff:a6:a8,dl_dst=3a:2b:0f:ba:95:01 actions=output:1
+ cookie=0x42000015fc5c55, duration=0.538s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=1,dl_src=3a:2b:0f:ba:95:01,dl_dst=ba:73:80:41:6c:25 actions=output:3
+ cookie=0x4200002483b115, duration=0.531s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=3,dl_src=ba:73:80:41:6c:25,dl_dst=3a:2b:0f:ba:95:01 actions=output:1
+ cookie=0x420000a715dcde, duration=0.517s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=1,dl_src=3a:2b:0f:ba:95:01,dl_dst=d2:2e:b7:59:da:1c actions=output:2
+ cookie=0x4200000e82d6d9, duration=0.515s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=2,dl_src=d2:2e:b7:59:da:1c,dl_dst=3a:2b:0f:ba:95:01 actions=output:1
+ cookie=0x42000084a8cb6d, duration=0.478s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=3,dl_src=ba:73:80:41:6c:25,dl_dst=f2:05:20:ff:a6:a8 actions=output:4
+ cookie=0x420000e7b28207, duration=0.457s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=4,dl_src=f2:05:20:ff:a6:a8,dl_dst=d2:2e:b7:59:da:1c actions=output:2
+ cookie=0x420000b06f343c, duration=0.453s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=2,dl_src=d2:2e:b7:59:da:1c,dl_dst=f2:05:20:ff:a6:a8 actions=output:4
+ cookie=0x420000f67b4c23, duration=0.378s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=3,dl_src=ba:73:80:41:6c:25,dl_dst=d2:2e:b7:59:da:1c actions=output:2
+ cookie=0x42000034442875, duration=0.373s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=2,dl_src=d2:2e:b7:59:da:1c,dl_dst=ba:73:80:41:6c:25 actions=output:3
+
+
+===== ports_s3 =====
+OFPST_PORT reply (OF1.3) (xid=0x2): 5 ports
+  port LOCAL: rx pkts=0, bytes=0, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=0, bytes=0, drop=0, errs=0, coll=0
+           duration=26.039s
+  port  4: rx pkts=48, bytes=4362, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=52, bytes=4698, drop=0, errs=0, coll=0
+           duration=26.045s
+  port  1: rx pkts=23, bytes=1846, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=54, bytes=5088, drop=0, errs=0, coll=0
+           duration=26.046s
+  port  2: rx pkts=23, bytes=1846, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=54, bytes=5088, drop=0, errs=0, coll=0
+           duration=26.046s
+  port  3: rx pkts=57, bytes=5356, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=48, bytes=4810, drop=0, errs=0, coll=0
+           duration=26.046s
+
+
+===== flows_s4 =====
+OFPST_FLOW reply (OF1.3) (xid=0x2):
+ cookie=0x10000261e0911, duration=24.860s, table=0, n_packets=14, n_bytes=1946, send_flow_rem priority=40000,dl_type=0x88cc actions=CONTROLLER:65535,clear_actions
+ cookie=0x10000687421fe, duration=24.860s, table=0, n_packets=14, n_bytes=1946, send_flow_rem priority=40000,dl_type=0x8942 actions=CONTROLLER:65535,clear_actions
+ cookie=0x10000810531f2, duration=24.860s, table=0, n_packets=11, n_bytes=1078, send_flow_rem priority=5,ip actions=CONTROLLER:65535,clear_actions
+ cookie=0x1000011326ce6, duration=24.860s, table=0, n_packets=37, n_bytes=1554, send_flow_rem priority=40000,arp actions=CONTROLLER:65535,clear_actions
+ cookie=0x420000cd61e494, duration=0.818s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=3,dl_src=5e:0d:2f:6a:95:a3,dl_dst=a6:14:93:cc:9d:a9 actions=output:2
+ cookie=0x420000884d28b4, duration=0.762s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=3,dl_src=5e:0d:2f:6a:95:a3,dl_dst=f2:05:20:ff:a6:a8 actions=output:1
+ cookie=0x4200005ac090fd, duration=0.760s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=1,dl_src=f2:05:20:ff:a6:a8,dl_dst=5e:0d:2f:6a:95:a3 actions=output:3
+ cookie=0x42000039835516, duration=0.646s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=2,dl_src=a6:14:93:cc:9d:a9,dl_dst=f2:05:20:ff:a6:a8 actions=output:1
+ cookie=0x420000f0c6ede3, duration=0.641s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=1,dl_src=f2:05:20:ff:a6:a8,dl_dst=a6:14:93:cc:9d:a9 actions=output:3
+ cookie=0x420000c642ab82, duration=0.574s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=2,dl_src=3a:2b:0f:ba:95:01,dl_dst=f2:05:20:ff:a6:a8 actions=output:1
+ cookie=0x42000031ab2923, duration=0.570s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=1,dl_src=f2:05:20:ff:a6:a8,dl_dst=3a:2b:0f:ba:95:01 actions=output:2
+ cookie=0x42000061e109aa, duration=0.502s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=1,dl_src=f2:05:20:ff:a6:a8,dl_dst=ba:73:80:41:6c:25 actions=output:3
+ cookie=0x4200009278ed97, duration=0.493s, table=0, n_packets=1, n_bytes=98, send_flow_rem priority=10,in_port=2,dl_src=ba:73:80:41:6c:25,dl_dst=f2:05:20:ff:a6:a8 actions=output:1
+ cookie=0x420000c2b1f4e5, duration=0.474s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=1,dl_src=f2:05:20:ff:a6:a8,dl_dst=d2:2e:b7:59:da:1c actions=output:2
+ cookie=0x4200001885987c, duration=0.461s, table=0, n_packets=0, n_bytes=0, send_flow_rem priority=10,in_port=2,dl_src=d2:2e:b7:59:da:1c,dl_dst=f2:05:20:ff:a6:a8 actions=output:1
+
+
+===== ports_s4 =====
+OFPST_PORT reply (OF1.3) (xid=0x2): 4 ports
+  port LOCAL: rx pkts=0, bytes=0, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=0, bytes=0, drop=0, errs=0, coll=0
+           duration=26.064s
+  port  1: rx pkts=23, bytes=1846, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=54, bytes=5088, drop=0, errs=0, coll=0
+           duration=26.067s
+  port  2: rx pkts=52, bytes=4698, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=48, bytes=4362, drop=0, errs=0, coll=0
+           duration=26.067s
+  port  3: rx pkts=43, bytes=4040, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=36, bytes=3914, drop=0, errs=0, coll=0
+           duration=26.068s
+

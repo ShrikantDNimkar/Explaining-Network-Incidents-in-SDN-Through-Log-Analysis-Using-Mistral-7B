@@ -1,0 +1,257 @@
+{
+  "run_id": "host_disconnection_r01",
+  "karaf_events": [
+    {
+      "timestamp": "",
+      "message": "\u001b[90m14:38:06.727\u001b[0m \u001b[1;32mINFO \u001b[m \u001b[90m[OFChannelHandler]\u001b[0m Received port status message from 00:00:00:00:00:00:00:02/2: OFPortStatusVer13(xid=0, reason=MODIFY, desc=OFPortDescVer13(portNo=2, hwAddr=0a:de:c8:e0:ac:eb, name=s2-eth2, config=[], state=[LINK_DOWN], curr=[PF_10GB_FD, PF_COPPER], advertised=[], supported=[], peer=[], currSpeed=10000000, maxSpeed=0))"
+    }
+  ],
+  "controller_state_by_phase": {
+    "baseline": {
+      "devices_available": {
+        "of:0000000000000003": true,
+        "of:0000000000000004": true,
+        "of:0000000000000001": true,
+        "of:0000000000000002": true
+      },
+      "link_pairs": [
+        "s1-s2",
+        "s1-s4",
+        "s2-s3",
+        "s3-s4"
+      ],
+      "host_ips": [
+        "10.1.0.1",
+        "10.1.0.2",
+        "10.1.0.3",
+        "10.1.0.4",
+        "10.1.0.5",
+        "10.1.0.6"
+      ],
+      "flow_count_total": 80
+    },
+    "post_inject_10s": {
+      "devices_available": {
+        "of:0000000000000003": true,
+        "of:0000000000000004": true,
+        "of:0000000000000001": true,
+        "of:0000000000000002": true
+      },
+      "link_pairs": [
+        "s1-s2",
+        "s1-s4",
+        "s2-s3",
+        "s3-s4"
+      ],
+      "host_ips": [
+        "10.1.0.1",
+        "10.1.0.2",
+        "10.1.0.3",
+        "10.1.0.4",
+        "10.1.0.6"
+      ],
+      "flow_count_total": 80
+    },
+    "post_inject_30s": {
+      "devices_available": {
+        "of:0000000000000003": true,
+        "of:0000000000000004": true,
+        "of:0000000000000001": true,
+        "of:0000000000000002": true
+      },
+      "link_pairs": [
+        "s1-s2",
+        "s1-s4",
+        "s2-s3",
+        "s3-s4"
+      ],
+      "host_ips": [
+        "10.1.0.1",
+        "10.1.0.2",
+        "10.1.0.3",
+        "10.1.0.4",
+        "10.1.0.6"
+      ],
+      "flow_count_total": 16
+    },
+    "post_inject_50s": {
+      "devices_available": {
+        "of:0000000000000003": true,
+        "of:0000000000000004": true,
+        "of:0000000000000001": true,
+        "of:0000000000000002": true
+      },
+      "link_pairs": [
+        "s1-s2",
+        "s1-s4",
+        "s2-s3",
+        "s3-s4"
+      ],
+      "host_ips": [
+        "10.1.0.1",
+        "10.1.0.2",
+        "10.1.0.3",
+        "10.1.0.4",
+        "10.1.0.6"
+      ],
+      "flow_count_total": 16
+    },
+    "recovery": {
+      "devices_available": {
+        "of:0000000000000003": true,
+        "of:0000000000000004": true,
+        "of:0000000000000001": true,
+        "of:0000000000000002": true
+      },
+      "link_pairs": [
+        "s1-s2",
+        "s1-s4",
+        "s2-s3",
+        "s3-s4"
+      ],
+      "host_ips": [
+        "10.1.0.1",
+        "10.1.0.2",
+        "10.1.0.3",
+        "10.1.0.4",
+        "10.1.0.6"
+      ],
+      "flow_count_total": 24
+    }
+  },
+  "ovs_flow_summary": {
+    "post_inject_10s": {
+      "s1": {
+        "total_rules": 14,
+        "drop_rules": 14
+      },
+      "s2": {
+        "total_rules": 24,
+        "drop_rules": 24
+      },
+      "s3": {
+        "total_rules": 26,
+        "drop_rules": 26
+      },
+      "s4": {
+        "total_rules": 16,
+        "drop_rules": 16
+      }
+    },
+    "post_inject_30s": {
+      "s1": {
+        "total_rules": 4,
+        "drop_rules": 4
+      },
+      "s2": {
+        "total_rules": 4,
+        "drop_rules": 4
+      },
+      "s3": {
+        "total_rules": 4,
+        "drop_rules": 4
+      },
+      "s4": {
+        "total_rules": 4,
+        "drop_rules": 4
+      }
+    },
+    "post_inject_50s": {
+      "s1": {
+        "total_rules": 4,
+        "drop_rules": 4
+      },
+      "s2": {
+        "total_rules": 4,
+        "drop_rules": 4
+      },
+      "s3": {
+        "total_rules": 4,
+        "drop_rules": 4
+      },
+      "s4": {
+        "total_rules": 4,
+        "drop_rules": 4
+      }
+    }
+  },
+  "connectivity": {
+    "pings": {
+      "baseline": [
+        {
+          "src": "h1",
+          "dst": "10.1.0.4",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 0.063
+        },
+        {
+          "src": "h2",
+          "dst": "10.1.0.3",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 0.046
+        }
+      ],
+      "post_inject_10s": [
+        {
+          "src": "h1",
+          "dst": "10.1.0.4",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 0.172
+        },
+        {
+          "src": "h2",
+          "dst": "10.1.0.3",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 0.139
+        }
+      ],
+      "post_inject_50s": [
+        {
+          "src": "h1",
+          "dst": "10.1.0.4",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 1.505
+        },
+        {
+          "src": "h2",
+          "dst": "10.1.0.3",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 1.528
+        }
+      ],
+      "recovery": [
+        {
+          "src": "h1",
+          "dst": "10.1.0.4",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 0.131
+        },
+        {
+          "src": "h2",
+          "dst": "10.1.0.3",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 1.349
+        }
+      ]
+    },
+    "iperf": [
+      {
+        "label": "baseline_iperf",
+        "throughput_mbps": 0.0,
+        "lost_pct": null,
+        "retransmits": null,
+        "udp": false
+      },
+      {
+        "label": "post_inject_iperf",
+        "throughput_mbps": 0.0,
+        "lost_pct": null,
+        "retransmits": null,
+        "udp": false
+      }
+    ]
+  },
+  "raw_log_excerpt": [
+    "\u001b[90m14:38:06.727\u001b[0m \u001b[1;32mINFO \u001b[m \u001b[90m[OFChannelHandler]\u001b[0m Received port status message from 00:00:00:00:00:00:00:02/2: OFPortStatusVer13(xid=0, reason=MODIFY, desc=OFPortDescVer13(portNo=2, hwAddr=0a:de:c8:e0:ac:eb, name=s2-eth2, config=[], state=[LINK_DOWN], curr=[PF_10GB_FD, PF_COPPER], advertised=[], supported=[], peer=[], currSpeed=10000000, maxSpeed=0))"
+  ]
+}

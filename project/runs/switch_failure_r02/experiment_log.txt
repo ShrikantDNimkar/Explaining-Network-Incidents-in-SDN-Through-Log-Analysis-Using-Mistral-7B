@@ -1,0 +1,22 @@
+2026-11-16T01:31:51.891Z | run switch_failure_r02 started, scenario=switch_failure
+2026-11-16T01:31:52.120Z | evidence snapshot phase baseline
+2026-11-16T01:31:52.936Z | ping h1->10.1.0.4 [baseline] loss=0.0%
+2026-11-16T01:31:53.752Z | ping h2->10.1.0.3 [baseline] loss=0.0%
+2026-11-16T01:31:53.996Z | INJECTED: switch s3 at 2026-11-16T01:31:53.754Z
+2026-11-16T01:31:53.996Z | wait 10s (post-inject stabilisation)
+2026-11-16T01:32:04.148Z | evidence snapshot phase post_inject_10s
+2026-11-16T01:32:04.964Z | ping h1->10.1.0.4 [post_inject_10s] loss=0.0%
+2026-11-16T01:32:15.780Z | ping h2->10.1.0.3 [post_inject_10s] loss=100.0%
+2026-11-16T01:32:15.780Z | wait 20s (mid observation)
+2026-11-16T01:32:35.899Z | evidence snapshot phase post_inject_30s
+2026-11-16T01:32:35.899Z | wait 20s (late observation)
+2026-11-16T01:32:56.006Z | evidence snapshot phase post_inject_50s
+2026-11-16T01:32:56.820Z | ping h1->10.1.0.4 [post_inject_50s] loss=0.0%
+2026-11-16T01:33:07.637Z | ping h2->10.1.0.3 [post_inject_50s] loss=100.0%
+2026-11-16T01:33:07.665Z | RESTORED at 2026-11-16T01:33:07.640Z
+2026-11-16T01:33:07.665Z | wait 15s (recovery stabilisation)
+2026-11-16T01:33:23.496Z | ping h1->10.1.0.4 [recovery] loss=0.0%
+2026-11-16T01:33:26.564Z | ping h2->10.1.0.3 [recovery] loss=100.0%
+2026-11-16T01:33:26.656Z | evidence snapshot phase recovery
+2026-11-16T01:33:26.776Z | karaf window: rc=0 lines=41
+2026-11-16T01:33:26.776Z | wait 10s (cooldown)

@@ -1,0 +1,110 @@
+[
+  {
+    "time": "2026-11-16T14:12:02.848Z",
+    "src": "h1",
+    "dst": "10.1.0.4",
+    "output_tail": "--- 10.1.0.4 ping statistics ---\n5 packets transmitted, 5 received, 0% packet loss, time 814ms\nrtt min/avg/max/mdev = 0.041/0.052/0.079/0.014 ms",
+    "sent": 5,
+    "received": 5,
+    "loss_pct": 0.0,
+    "avg_rtt_ms": 0.052,
+    "label": "baseline"
+  },
+  {
+    "time": "2026-11-16T14:12:03.664Z",
+    "src": "h2",
+    "dst": "10.1.0.3",
+    "output_tail": "--- 10.1.0.3 ping statistics ---\n5 packets transmitted, 5 received, 0% packet loss, time 813ms\nrtt min/avg/max/mdev = 0.038/0.049/0.059/0.007 ms",
+    "sent": 5,
+    "received": 5,
+    "loss_pct": 0.0,
+    "avg_rtt_ms": 0.049,
+    "label": "baseline"
+  },
+  {
+    "label": "baseline_iperf",
+    "time": "2026-11-16T14:12:03.666Z",
+    "client": "h1",
+    "server": "10.1.0.4",
+    "udp": false,
+    "raw_head": "{\n\t\"start\":\t{",
+    "throughput_mbps": 0.0,
+    "retransmits": null
+  },
+  {
+    "time": "2026-11-16T14:12:24.868Z",
+    "src": "h1",
+    "dst": "10.1.0.4",
+    "output_tail": "\n--- 10.1.0.4 ping statistics ---\n5 packets transmitted, 0 received, 100% packet loss, time 813ms",
+    "sent": 5,
+    "received": 0,
+    "loss_pct": 100.0,
+    "avg_rtt_ms": null,
+    "label": "post_inject_10s"
+  },
+  {
+    "time": "2026-11-16T14:12:25.684Z",
+    "src": "h2",
+    "dst": "10.1.0.3",
+    "output_tail": "--- 10.1.0.3 ping statistics ---\n5 packets transmitted, 5 received, 0% packet loss, time 813ms\nrtt min/avg/max/mdev = 0.055/2.759/12.953/5.102 ms",
+    "sent": 5,
+    "received": 5,
+    "loss_pct": 0.0,
+    "avg_rtt_ms": 2.759,
+    "label": "post_inject_10s"
+  },
+  {
+    "time": "2026-11-16T14:13:16.725Z",
+    "src": "h1",
+    "dst": "10.1.0.4",
+    "output_tail": "\n--- 10.1.0.4 ping statistics ---\n5 packets transmitted, 0 received, 100% packet loss, time 814ms",
+    "sent": 5,
+    "received": 0,
+    "loss_pct": 100.0,
+    "avg_rtt_ms": null,
+    "label": "post_inject_50s"
+  },
+  {
+    "time": "2026-11-16T14:13:17.541Z",
+    "src": "h2",
+    "dst": "10.1.0.3",
+    "output_tail": "--- 10.1.0.3 ping statistics ---\n5 packets transmitted, 5 received, 0% packet loss, time 813ms\nrtt min/avg/max/mdev = 0.044/1.619/7.090/2.749 ms",
+    "sent": 5,
+    "received": 5,
+    "loss_pct": 0.0,
+    "avg_rtt_ms": 1.619,
+    "label": "post_inject_50s"
+  },
+  {
+    "label": "post_inject_iperf",
+    "time": "2026-11-16T14:13:20.620Z",
+    "client": "h1",
+    "server": "10.1.0.4",
+    "udp": false,
+    "raw_head": "{\n\t\"start\":\t{",
+    "throughput_mbps": 0.0,
+    "retransmits": null
+  },
+  {
+    "time": "2026-11-16T14:13:38.732Z",
+    "src": "h1",
+    "dst": "10.1.0.4",
+    "output_tail": "--- 10.1.0.4 ping statistics ---\n5 packets transmitted, 0 received, +5 errors, 100% packet loss, time 814ms\npipe 5",
+    "sent": 5,
+    "received": 0,
+    "loss_pct": 100.0,
+    "avg_rtt_ms": null,
+    "label": "recovery"
+  },
+  {
+    "time": "2026-11-16T14:13:39.548Z",
+    "src": "h2",
+    "dst": "10.1.0.3",
+    "output_tail": "--- 10.1.0.3 ping statistics ---\n5 packets transmitted, 5 received, 0% packet loss, time 814ms\nrtt min/avg/max/mdev = 0.047/1.424/6.146/2.378 ms",
+    "sent": 5,
+    "received": 5,
+    "loss_pct": 0.0,
+    "avg_rtt_ms": 1.424,
+    "label": "recovery"
+  }
+]

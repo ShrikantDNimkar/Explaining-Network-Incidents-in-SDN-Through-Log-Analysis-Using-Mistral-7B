@@ -1,0 +1,172 @@
+# captured 2026-11-16T14:42:10.048Z phase baseline
+
+===== ovs_vsctl_show =====
+eefa7031-4c28-44b3-bf66-ac7641c14e8a
+    Bridge s2
+        Controller "tcp:10.0.0.10:6653"
+            is_connected: true
+        fail_mode: secure
+        Port s2-eth3
+            Interface s2-eth3
+        Port s2-eth4
+            Interface s2-eth4
+        Port s2
+            Interface s2
+                type: internal
+        Port s2-eth2
+            Interface s2-eth2
+        Port s2-eth1
+            Interface s2-eth1
+    Bridge s3
+        Controller "tcp:10.0.0.10:6653"
+            is_connected: true
+        fail_mode: secure
+        Port s3
+            Interface s3
+                type: internal
+        Port s3-eth2
+            Interface s3-eth2
+        Port s3-eth4
+            Interface s3-eth4
+        Port s3-eth3
+            Interface s3-eth3
+        Port s3-eth1
+            Interface s3-eth1
+    Bridge s4
+        Controller "tcp:10.0.0.10:6653"
+            is_connected: true
+        fail_mode: secure
+        Port s4-eth1
+            Interface s4-eth1
+        Port s4-eth2
+            Interface s4-eth2
+        Port s4
+            Interface s4
+                type: internal
+        Port s4-eth3
+            Interface s4-eth3
+    Bridge s1
+        Controller "tcp:10.0.0.10:6653"
+            is_connected: true
+        fail_mode: secure
+        Port s1-eth3
+            Interface s1-eth3
+        Port s1-eth1
+            Interface s1-eth1
+        Port s1
+            Interface s1
+                type: internal
+        Port s1-eth2
+            Interface s1-eth2
+    ovs_version: "2.13.8"
+
+
+===== flows_s1 =====
+OFPST_FLOW reply (OF1.3) (xid=0x2):
+ cookie=0x10000021b41dc, duration=269.514s, table=0, n_packets=18, n_bytes=1764, send_flow_rem priority=5,ip actions=CONTROLLER:65535,clear_actions
+ cookie=0x10000ea6f4b8e, duration=269.510s, table=0, n_packets=47, n_bytes=1974, send_flow_rem priority=40000,arp actions=CONTROLLER:65535,clear_actions
+ cookie=0x100007a585b6f, duration=269.504s, table=0, n_packets=172, n_bytes=23908, send_flow_rem priority=40000,dl_type=0x8942 actions=CONTROLLER:65535,clear_actions
+ cookie=0x100009465555a, duration=269.498s, table=0, n_packets=172, n_bytes=23908, send_flow_rem priority=40000,dl_type=0x88cc actions=CONTROLLER:65535,clear_actions
+ cookie=0x420000ca2bb5ba, duration=11.824s, table=0, n_packets=4, n_bytes=392, send_flow_rem priority=10,in_port=1,dl_src=de:46:42:0a:f2:3a,dl_dst=46:93:7d:13:c2:4d actions=output:3
+ cookie=0x4200009c031ad1, duration=11.819s, table=0, n_packets=4, n_bytes=392, send_flow_rem priority=10,in_port=3,dl_src=46:93:7d:13:c2:4d,dl_dst=de:46:42:0a:f2:3a actions=output:1
+
+
+===== ports_s1 =====
+OFPST_PORT reply (OF1.3) (xid=0x2): 4 ports
+  port LOCAL: rx pkts=0, bytes=0, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=0, bytes=0, drop=0, errs=0, coll=0
+           duration=270.731s
+  port  1: rx pkts=101, bytes=8486, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=253, bytes=28542, drop=0, errs=0, coll=0
+           duration=270.734s
+  port  2: rx pkts=206, bytes=26380, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=207, bytes=26646, drop=0, errs=0, coll=0
+           duration=270.734s
+  port  3: rx pkts=265, bytes=31830, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=270, bytes=31916, drop=0, errs=0, coll=0
+           duration=270.734s
+
+
+===== flows_s2 =====
+OFPST_FLOW reply (OF1.3) (xid=0x2):
+ cookie=0x10000dc56d70b, duration=269.525s, table=0, n_packets=174, n_bytes=24186, send_flow_rem priority=40000,dl_type=0x8942 actions=CONTROLLER:65535,clear_actions
+ cookie=0x10000c70edd85, duration=269.503s, table=0, n_packets=58, n_bytes=2436, send_flow_rem priority=40000,arp actions=CONTROLLER:65535,clear_actions
+ cookie=0x100002341485c, duration=269.502s, table=0, n_packets=30, n_bytes=2940, send_flow_rem priority=5,ip actions=CONTROLLER:65535,clear_actions
+ cookie=0x1000002bbd8d4, duration=269.502s, table=0, n_packets=174, n_bytes=24186, send_flow_rem priority=40000,dl_type=0x88cc actions=CONTROLLER:65535,clear_actions
+ cookie=0x420000c4b04a0c, duration=11.026s, table=0, n_packets=4, n_bytes=392, send_flow_rem priority=10,in_port=1,dl_src=7e:23:4a:f8:ab:29,dl_dst=82:6f:e0:10:03:e9 actions=output:4
+ cookie=0x4200005d961625, duration=11.024s, table=0, n_packets=4, n_bytes=392, send_flow_rem priority=10,in_port=4,dl_src=82:6f:e0:10:03:e9,dl_dst=7e:23:4a:f8:ab:29 actions=output:1
+
+
+===== ports_s2 =====
+OFPST_PORT reply (OF1.3) (xid=0x2): 5 ports
+  port LOCAL: rx pkts=0, bytes=0, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=0, bytes=0, drop=0, errs=0, coll=0
+           duration=270.736s
+  port  1: rx pkts=101, bytes=8594, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=293, bytes=33924, drop=0, errs=0, coll=0
+           duration=270.738s
+  port  4: rx pkts=283, bytes=33422, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=294, bytes=34108, drop=0, errs=0, coll=0
+           duration=270.738s
+  port  2: rx pkts=34, bytes=2712, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=181, bytes=22574, drop=0, errs=0, coll=0
+           duration=270.738s
+  port  3: rx pkts=207, bytes=26646, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=206, bytes=26380, drop=0, errs=0, coll=0
+           duration=270.738s
+
+
+===== flows_s3 =====
+OFPST_FLOW reply (OF1.3) (xid=0x2):
+ cookie=0x10000a6288ee9, duration=269.532s, table=0, n_packets=85, n_bytes=3570, send_flow_rem priority=40000,arp actions=CONTROLLER:65535,clear_actions
+ cookie=0x10000be641e06, duration=269.531s, table=0, n_packets=32, n_bytes=3136, send_flow_rem priority=5,ip actions=CONTROLLER:65535,clear_actions
+ cookie=0x10000464e5575, duration=269.522s, table=0, n_packets=174, n_bytes=24186, send_flow_rem priority=40000,dl_type=0x8942 actions=CONTROLLER:65535,clear_actions
+ cookie=0x10000646f55aa, duration=269.509s, table=0, n_packets=174, n_bytes=24186, send_flow_rem priority=40000,dl_type=0x88cc actions=CONTROLLER:65535,clear_actions
+ cookie=0x420000707b1754, duration=27.684s, table=0, n_packets=9, n_bytes=882, send_flow_rem priority=10,in_port=3,dl_src=7e:23:4a:f8:ab:29,dl_dst=82:6f:e0:10:03:e9 actions=output:1
+ cookie=0x420000f14acf24, duration=27.682s, table=0, n_packets=9, n_bytes=882, send_flow_rem priority=10,in_port=1,dl_src=82:6f:e0:10:03:e9,dl_dst=7e:23:4a:f8:ab:29 actions=output:3
+
+
+===== ports_s3 =====
+OFPST_PORT reply (OF1.3) (xid=0x2): 5 ports
+  port LOCAL: rx pkts=0, bytes=0, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=0, bytes=0, drop=0, errs=0, coll=0
+           duration=270.750s
+  port  4: rx pkts=220, bytes=27192, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=228, bytes=27752, drop=0, errs=0, coll=0
+           duration=270.754s
+  port  1: rx pkts=100, bytes=8524, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=291, bytes=33646, drop=0, errs=0, coll=0
+           duration=270.754s
+  port  2: rx pkts=42, bytes=3076, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=187, bytes=22882, drop=0, errs=0, coll=0
+           duration=270.754s
+  port  3: rx pkts=294, bytes=34108, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=283, bytes=33422, drop=0, errs=0, coll=0
+           duration=270.754s
+
+
+===== flows_s4 =====
+OFPST_FLOW reply (OF1.3) (xid=0x2):
+ cookie=0x10000261e0911, duration=269.545s, table=0, n_packets=174, n_bytes=24186, send_flow_rem priority=40000,dl_type=0x88cc actions=CONTROLLER:65535,clear_actions
+ cookie=0x1000011326ce6, duration=269.529s, table=0, n_packets=70, n_bytes=2940, send_flow_rem priority=40000,arp actions=CONTROLLER:65535,clear_actions
+ cookie=0x10000810531f2, duration=269.529s, table=0, n_packets=19, n_bytes=1862, send_flow_rem priority=5,ip actions=CONTROLLER:65535,clear_actions
+ cookie=0x10000687421fe, duration=269.529s, table=0, n_packets=174, n_bytes=24186, send_flow_rem priority=40000,dl_type=0x8942 actions=CONTROLLER:65535,clear_actions
+ cookie=0x420000f6014c5d, duration=11.854s, table=0, n_packets=4, n_bytes=392, send_flow_rem priority=10,in_port=3,dl_src=de:46:42:0a:f2:3a,dl_dst=46:93:7d:13:c2:4d actions=output:1
+ cookie=0x42000061e73ed5, duration=11.852s, table=0, n_packets=4, n_bytes=392, send_flow_rem priority=10,in_port=1,dl_src=46:93:7d:13:c2:4d,dl_dst=de:46:42:0a:f2:3a actions=output:3
+
+
+===== ports_s4 =====
+OFPST_PORT reply (OF1.3) (xid=0x2): 4 ports
+  port LOCAL: rx pkts=0, bytes=0, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=0, bytes=0, drop=0, errs=0, coll=0
+           duration=270.767s
+  port  1: rx pkts=94, bytes=7800, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=282, bytes=32840, drop=0, errs=0, coll=0
+           duration=270.770s
+  port  2: rx pkts=228, bytes=27752, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=220, bytes=27192, drop=0, errs=0, coll=0
+           duration=270.770s
+  port  3: rx pkts=270, bytes=31916, drop=0, errs=0, frame=0, over=0, crc=0
+           tx pkts=265, bytes=31830, drop=0, errs=0, coll=0
+           duration=270.771s
+

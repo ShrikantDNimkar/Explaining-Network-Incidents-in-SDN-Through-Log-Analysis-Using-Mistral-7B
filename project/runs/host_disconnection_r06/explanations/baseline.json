@@ -1,0 +1,17 @@
+{
+  "condition": "baseline",
+  "elapsed_ms": 0,
+  "explanation": {
+    "category": "host_disconnection",
+    "network_impact": "Host h3 (10.1.0.3) stopped responding.",
+    "likely_cause": "The host interface went down or the host was removed from the ONOS host store.",
+    "evidence": [
+      "10.1.0.3 absent from hosts in phase post_inject_10s",
+      "ping loss >= 90% to 10.1.0.3"
+    ],
+    "operator_checks": [
+      "Check the host interface state (ip link)",
+      "Check host link/cable in the topology"
+    ]
+  }
+}

@@ -1,0 +1,254 @@
+{
+  "run_id": "normal_r06",
+  "karaf_events": [],
+  "controller_state_by_phase": {
+    "baseline": {
+      "devices_available": {
+        "of:0000000000000003": true,
+        "of:0000000000000004": true,
+        "of:0000000000000001": true,
+        "of:0000000000000002": true
+      },
+      "link_pairs": [
+        "s1-s2",
+        "s1-s4",
+        "s2-s3",
+        "s3-s4"
+      ],
+      "host_ips": [
+        "10.1.0.1",
+        "10.1.0.2",
+        "10.1.0.3",
+        "10.1.0.4",
+        "10.1.0.5",
+        "10.1.0.6"
+      ],
+      "flow_count_total": 24
+    },
+    "post_inject_10s": {
+      "devices_available": {
+        "of:0000000000000003": true,
+        "of:0000000000000004": true,
+        "of:0000000000000001": true,
+        "of:0000000000000002": true
+      },
+      "link_pairs": [
+        "s1-s2",
+        "s1-s4",
+        "s2-s3",
+        "s3-s4"
+      ],
+      "host_ips": [
+        "10.1.0.1",
+        "10.1.0.2",
+        "10.1.0.3",
+        "10.1.0.4",
+        "10.1.0.5",
+        "10.1.0.6"
+      ],
+      "flow_count_total": 24
+    },
+    "post_inject_30s": {
+      "devices_available": {
+        "of:0000000000000003": true,
+        "of:0000000000000004": true,
+        "of:0000000000000001": true,
+        "of:0000000000000002": true
+      },
+      "link_pairs": [
+        "s1-s2",
+        "s1-s4",
+        "s2-s3",
+        "s3-s4"
+      ],
+      "host_ips": [
+        "10.1.0.1",
+        "10.1.0.2",
+        "10.1.0.3",
+        "10.1.0.4",
+        "10.1.0.5",
+        "10.1.0.6"
+      ],
+      "flow_count_total": 16
+    },
+    "post_inject_50s": {
+      "devices_available": {
+        "of:0000000000000003": true,
+        "of:0000000000000004": true,
+        "of:0000000000000001": true,
+        "of:0000000000000002": true
+      },
+      "link_pairs": [
+        "s1-s2",
+        "s1-s4",
+        "s2-s3",
+        "s3-s4"
+      ],
+      "host_ips": [
+        "10.1.0.1",
+        "10.1.0.2",
+        "10.1.0.3",
+        "10.1.0.4",
+        "10.1.0.5",
+        "10.1.0.6"
+      ],
+      "flow_count_total": 16
+    },
+    "recovery": {
+      "devices_available": {
+        "of:0000000000000003": true,
+        "of:0000000000000004": true,
+        "of:0000000000000001": true,
+        "of:0000000000000002": true
+      },
+      "link_pairs": [
+        "s1-s2",
+        "s1-s4",
+        "s2-s3",
+        "s3-s4"
+      ],
+      "host_ips": [
+        "10.1.0.1",
+        "10.1.0.2",
+        "10.1.0.3",
+        "10.1.0.4",
+        "10.1.0.5",
+        "10.1.0.6"
+      ],
+      "flow_count_total": 24
+    }
+  },
+  "ovs_flow_summary": {
+    "post_inject_10s": {
+      "s1": {
+        "total_rules": 6,
+        "drop_rules": 6
+      },
+      "s2": {
+        "total_rules": 6,
+        "drop_rules": 6
+      },
+      "s3": {
+        "total_rules": 6,
+        "drop_rules": 6
+      },
+      "s4": {
+        "total_rules": 6,
+        "drop_rules": 6
+      }
+    },
+    "post_inject_30s": {
+      "s1": {
+        "total_rules": 4,
+        "drop_rules": 4
+      },
+      "s2": {
+        "total_rules": 4,
+        "drop_rules": 4
+      },
+      "s3": {
+        "total_rules": 4,
+        "drop_rules": 4
+      },
+      "s4": {
+        "total_rules": 4,
+        "drop_rules": 4
+      }
+    },
+    "post_inject_50s": {
+      "s1": {
+        "total_rules": 4,
+        "drop_rules": 4
+      },
+      "s2": {
+        "total_rules": 4,
+        "drop_rules": 4
+      },
+      "s3": {
+        "total_rules": 4,
+        "drop_rules": 4
+      },
+      "s4": {
+        "total_rules": 4,
+        "drop_rules": 4
+      }
+    }
+  },
+  "connectivity": {
+    "pings": {
+      "baseline": [
+        {
+          "src": "h1",
+          "dst": "10.1.0.4",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 0.151
+        },
+        {
+          "src": "h2",
+          "dst": "10.1.0.3",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 0.134
+        }
+      ],
+      "post_inject_10s": [
+        {
+          "src": "h1",
+          "dst": "10.1.0.4",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 0.048
+        },
+        {
+          "src": "h2",
+          "dst": "10.1.0.3",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 0.182
+        }
+      ],
+      "post_inject_50s": [
+        {
+          "src": "h1",
+          "dst": "10.1.0.4",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 1.24
+        },
+        {
+          "src": "h2",
+          "dst": "10.1.0.3",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 1.359
+        }
+      ],
+      "recovery": [
+        {
+          "src": "h1",
+          "dst": "10.1.0.4",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 0.146
+        },
+        {
+          "src": "h2",
+          "dst": "10.1.0.3",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 1.265
+        }
+      ]
+    },
+    "iperf": [
+      {
+        "label": "baseline_iperf",
+        "throughput_mbps": 0.0,
+        "lost_pct": null,
+        "retransmits": null,
+        "udp": false
+      },
+      {
+        "label": "post_inject_iperf",
+        "throughput_mbps": 0.0,
+        "lost_pct": null,
+        "retransmits": null,
+        "udp": false
+      }
+    ]
+  },
+  "raw_log_excerpt": []
+}

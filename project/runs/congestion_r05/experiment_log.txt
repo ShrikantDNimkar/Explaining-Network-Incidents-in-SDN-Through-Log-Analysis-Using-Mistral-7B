@@ -1,0 +1,22 @@
+2026-11-16T14:25:23.917Z | run congestion_r05 started, scenario=congestion
+2026-11-16T14:25:24.090Z | evidence snapshot phase baseline
+2026-11-16T14:25:24.904Z | ping h1->10.1.0.4 [baseline] loss=0.0%
+2026-11-16T14:25:25.720Z | ping h2->10.1.0.3 [baseline] loss=0.0%
+2026-11-16T14:25:57.676Z | INJECTED: netem delay=150ms loss=8% on s3-eth1 at 2026-11-16T14:25:25.723Z
+2026-11-16T14:25:57.676Z | wait 10s (post-inject stabilisation)
+2026-11-16T14:26:07.766Z | evidence snapshot phase post_inject_10s
+2026-11-16T14:26:08.580Z | ping h1->10.1.0.4 [post_inject_10s] loss=0.0%
+2026-11-16T14:26:09.534Z | ping h2->10.1.0.3 [post_inject_10s] loss=0.0%
+2026-11-16T14:26:09.534Z | wait 20s (mid observation)
+2026-11-16T14:26:29.632Z | evidence snapshot phase post_inject_30s
+2026-11-16T14:26:29.632Z | wait 20s (late observation)
+2026-11-16T14:26:49.736Z | evidence snapshot phase post_inject_50s
+2026-11-16T14:26:50.552Z | ping h1->10.1.0.4 [post_inject_50s] loss=0.0%
+2026-11-16T14:26:51.505Z | ping h2->10.1.0.3 [post_inject_50s] loss=0.0%
+2026-11-16T14:26:51.511Z | RESTORED at 2026-11-16T14:26:51.508Z
+2026-11-16T14:26:51.512Z | wait 15s (recovery stabilisation)
+2026-11-16T14:27:07.340Z | ping h1->10.1.0.4 [recovery] loss=0.0%
+2026-11-16T14:27:08.156Z | ping h2->10.1.0.3 [recovery] loss=0.0%
+2026-11-16T14:27:08.243Z | evidence snapshot phase recovery
+2026-11-16T14:27:08.288Z | karaf window: rc=0 lines=0
+2026-11-16T14:27:08.289Z | wait 10s (cooldown)

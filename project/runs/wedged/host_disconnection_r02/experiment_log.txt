@@ -1,0 +1,22 @@
+2026-11-16T00:48:46.744Z | run host_disconnection_r02 started, scenario=host_disconnection
+2026-11-16T00:48:46.834Z | evidence snapshot phase baseline
+2026-11-16T00:48:49.892Z | ping h1->10.1.0.4 [baseline] loss=100.0%
+2026-11-16T00:48:49.894Z | ping h2->10.1.0.3 [baseline] loss=100.0%
+2026-11-16T00:48:52.971Z | INJECTED: host h6 at 2026-11-16T00:48:52.964Z
+2026-11-16T00:48:52.971Z | wait 10s (post-inject stabilisation)
+2026-11-16T00:49:03.046Z | evidence snapshot phase post_inject_10s
+2026-11-16T00:49:06.116Z | ping h1->10.1.0.4 [post_inject_10s] loss=100.0%
+2026-11-16T00:49:06.118Z | ping h2->10.1.0.3 [post_inject_10s] loss=100.0%
+2026-11-16T00:49:06.118Z | wait 20s (mid observation)
+2026-11-16T00:49:26.230Z | evidence snapshot phase post_inject_30s
+2026-11-16T00:49:26.230Z | wait 20s (late observation)
+2026-11-16T00:49:46.342Z | evidence snapshot phase post_inject_50s
+2026-11-16T00:49:49.412Z | ping h1->10.1.0.4 [post_inject_50s] loss=100.0%
+2026-11-16T00:49:49.414Z | ping h2->10.1.0.3 [post_inject_50s] loss=100.0%
+2026-11-16T00:49:52.490Z | RESTORED at 2026-11-16T00:49:52.484Z
+2026-11-16T00:49:52.490Z | wait 15s (recovery stabilisation)
+2026-11-16T00:50:10.564Z | ping h1->10.1.0.4 [recovery] loss=100.0%
+2026-11-16T00:50:10.567Z | ping h2->10.1.0.3 [recovery] loss=100.0%
+2026-11-16T00:50:10.670Z | evidence snapshot phase recovery
+2026-11-16T00:50:10.704Z | karaf window: rc=0 lines=289
+2026-11-16T00:50:10.705Z | wait 10s (cooldown)

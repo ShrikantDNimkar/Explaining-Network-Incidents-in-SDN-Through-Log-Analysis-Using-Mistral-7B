@@ -1,0 +1,6 @@
+{
+  "condition": "mistral_structured",
+  "elapsed_ms": 437934,
+  "eval_count_tokens": 356,
+  "explanation_text": " {\n  \"incident_category\": \"congestion\",\n  \"observed_events\": [\n    \"Flow count decreased from 24 to 16\",\n    \"Increased packet loss in ping tests\",\n    \"Increased round-trip time in ping tests\"\n  ],\n  \"network_impact\": [\n    \"Link between h1 and h4\",\n    \"Link between h2 and h3\"\n  ],\n  \"likely_cause\": {\n    \"explanation\": \"The decrease in flow count, increased packet loss, and increased round-trip time suggest network congestion.\"\n  },\n  \"evidence_cited\": [\n    \"Flow count total: 24 (baseline) and 16 (post_inject_50s)\",\n    \"Ping loss_pct: 0.0 (baseline) and 20.0 (post_inject_10s)\",\n    \"Ping avg_rtt_ms: 0.142 (baseline) and 1.113 (post_inject_10s)\"\n  ],\n  \"operator_checks\": [\n    \"Check the network for any ongoing traffic injections or changes\",\n    \"Investigate the OpenFlow rules to ensure proper configuration\",\n    \"Analyze the network traffic to identify any anomalies or patterns\"\n  ],\n  \"uncertainty\": \"The incident record does not provide information about the cause of the congestion, such as a specific traffic source or misconfiguration.\"\n}"
+}

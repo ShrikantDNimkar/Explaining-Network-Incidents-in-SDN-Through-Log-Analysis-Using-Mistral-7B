@@ -1,0 +1,30 @@
+{
+  "run_id": "switch_failure_r02",
+  "scenario": "switch_failure",
+  "injected_action": "switch s3",
+  "variant": {
+    "switch": "s3",
+    "isolates": [
+      "h3",
+      "h6"
+    ]
+  },
+  "inject_time": "2026-11-16T00:30:20.116Z",
+  "restore_time": "2026-11-16T00:31:12.240Z",
+  "observed_outcome": {
+    "recovered_after_restore": false,
+    "baseline_loss_pct": [
+      0.0,
+      100.0
+    ],
+    "post_inject_loss_pct": [
+      0.0,
+      100.0
+    ]
+  },
+  "affected_nodes": [
+    "s3",
+    "h3",
+    "h6"
+  ]
+}

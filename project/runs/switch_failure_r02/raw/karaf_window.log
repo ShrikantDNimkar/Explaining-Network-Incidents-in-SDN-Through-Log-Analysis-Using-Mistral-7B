@@ -1,0 +1,41 @@
+[90m01:31:53.860[0m [1;32mINFO [m [90m[OFChannelHandler][0m Switch disconnected callback for sw:NiciraSwitchHandshaker{session=10.0.0.20:60698, dpid=00:00:00:00:00:00:00:03}. Cleaning up ...
+[90m01:31:53.862[0m [1;33mWARN [m [90m[OFChannelHandler][0m Dispatcher interrupted
+[90m01:31:53.862[0m [1;32mINFO [m [90m[OFChannelHandler][0m NiciraSwitchHandshaker{session=10.0.0.20:60698, dpid=00:00:00:00:00:00:00:03}:removal called
+[90m01:31:53.863[0m [1;32mINFO [m [90m[PortStatsCollector][0m Stopping Port Stats collection thread for 00:00:00:00:00:00:00:03
+[90m01:31:53.864[0m [1;32mINFO [m [90m[DeviceManager][0m Device of:0000000000000003 disconnected from this node: 10.0.0.10
+[90m01:31:53.864[0m [1;32mINFO [m [90m[DeviceManager][0m Device of:0000000000000003 is fully disconnected from the cluster
+[90m01:31:53.869[0m [1;32mINFO [m [90m[GroupStatsCollector][0m Stopping Group Stats collection thread for 00:00:00:00:00:00:00:03
+[90m01:31:53.869[0m [1;32mINFO [m [90m[MeterStatsCollector][0m Stopping Meter Stats collection thread for 00:00:00:00:00:00:00:03
+[90m01:31:53.888[0m [1;32mINFO [m [90m[TopologyManager][0m Topology DefaultTopology{time=8201345829056, creationTime=1794792713885, computeCost=475904, clusters=1, devices=3, links=4} changed
+[90m01:31:53.939[0m [1;32mINFO [m [90m[OFChannelHandler][0m Received port status message from 00:00:00:00:00:00:00:02/4: OFPortStatusVer13(xid=0, reason=MODIFY, desc=OFPortDescVer13(portNo=4, hwAddr=1e:19:1c:4f:97:0f, name=s2-eth4, config=[], state=[], curr=[PF_10GB_FD, PF_COPPER], advertised=[], supported=[], peer=[], currSpeed=10000000, maxSpeed=0))
+[90m01:31:53.941[0m [1;32mINFO [m [90m[OFChannelHandler][0m Received port status message from 00:00:00:00:00:00:00:02/4: OFPortStatusVer13(xid=0, reason=DELETE, desc=OFPortDescVer13(portNo=4, hwAddr=1e:19:1c:4f:97:0f, name=s2-eth4, config=[], state=[], curr=[PF_10GB_FD, PF_COPPER], advertised=[], supported=[], peer=[], currSpeed=10000000, maxSpeed=0))
+[90m01:31:53.945[0m [1;32mINFO [m [90m[GossipDeviceStore][0m Deleted port: of:0000000000000002/4
+[90m01:31:53.946[0m [1;32mINFO [m [90m[DeviceManager][0m Device of:0000000000000002 port 4 status changed
+[90m01:31:53.970[0m [1;32mINFO [m [90m[OFChannelHandler][0m Received port status message from 00:00:00:00:00:00:00:04/2: OFPortStatusVer13(xid=0, reason=DELETE, desc=OFPortDescVer13(portNo=2, hwAddr=32:d9:5b:c2:d2:f1, name=s4-eth2, config=[], state=[LIVE], curr=[PF_10GB_FD, PF_COPPER], advertised=[], supported=[], peer=[], currSpeed=10000000, maxSpeed=0))
+[90m01:31:53.972[0m [1;32mINFO [m [90m[GossipDeviceStore][0m Deleted port: of:0000000000000004/2
+[90m01:31:53.972[0m [1;32mINFO [m [90m[DeviceManager][0m Device of:0000000000000004 port 2 status changed
+[90m01:31:58.496[0m [1;33mWARN [m [90m[OFChannelHandler][0m Dropping messages for switch NiciraSwitchHandshaker{session=10.0.0.20:60698, dpid=00:00:00:00:00:00:00:03} because channel is not connected: [OFGroupStatsRequestVer13(xid=29, flags=[], group=all)]
+[90m01:31:58.497[0m [1;33mWARN [m [90m[NiciraSwitchHandshaker][0m Dropping messages for switch 00:00:00:00:00:00:00:03 because channel is not connected: [OFGroupStatsRequestVer13(xid=29, flags=[], group=all)]
+[90m01:31:58.498[0m [1;33mWARN [m [90m[OFChannelHandler][0m Dropping messages for switch NiciraSwitchHandshaker{session=10.0.0.20:60698, dpid=00:00:00:00:00:00:00:03} because channel is not connected: [OFGroupDescStatsRequestVer13(xid=30, flags=[])]
+[90m01:31:58.498[0m [1;33mWARN [m [90m[NiciraSwitchHandshaker][0m Dropping messages for switch 00:00:00:00:00:00:00:03 because channel is not connected: [OFGroupDescStatsRequestVer13(xid=30, flags=[])]
+[90m01:31:58.499[0m [1;33mWARN [m [90m[OFChannelHandler][0m Dropping messages for switch NiciraSwitchHandshaker{session=10.0.0.20:60698, dpid=00:00:00:00:00:00:00:03} because channel is not connected: [OFMeterStatsRequestVer13(xid=0, flags=[], meterId=-1)]
+[90m01:31:58.499[0m [1;33mWARN [m [90m[NiciraSwitchHandshaker][0m Dropping messages for switch 00:00:00:00:00:00:00:03 because channel is not connected: [OFMeterStatsRequestVer13(xid=0, flags=[], meterId=-1)]
+[90m01:33:07.654[0m [1;32mINFO [m [90m[OFChannelHandler][0m New switch connection from /10.0.0.20:46928
+[90m01:33:07.676[0m [1;32mINFO [m [90m[OFChannelHandler][0m Sending OF_13 Hello to /10.0.0.20:46928
+[90m01:33:08.130[0m [1;33mWARN [m [90m[OFChannelHandler][0m Config Reply from switch [/10.0.0.20:46928 DPID[00:00:00:00:00:00:00:03]] has miss length set to 128
+[90m01:33:08.131[0m [1;32mINFO [m [90m[OFChannelHandler][0m Received meter features from [/10.0.0.20:46928 DPID[00:00:00:00:00:00:00:03]] with max meters: 200000
+[90m01:33:08.132[0m [1;32mINFO [m [90m[OFChannelHandler][0m Received switch description reply OFDescStatsReplyVer13(xid=4294967289, flags=[], mfrDesc=Nicira, Inc., hwDesc=Open vSwitch, swDesc=2.13.8, serialNum=None, dpDesc=s3) from switch at /10.0.0.20:46928
+[90m01:33:08.133[0m [1;32mINFO [m [90m[Controller][0m Driver 'ovs' assigned to device 00:00:00:00:00:00:00:03
+[90m01:33:08.133[0m [1;32mINFO [m [90m[OpenFlowControllerImpl$OpenFlowSwitchAgent][0m Added switch 00:00:00:00:00:00:00:03
+[90m01:33:08.137[0m [1;32mINFO [m [90m[DeviceManager][0m Local role is MASTER for of:0000000000000003
+[90m01:33:08.138[0m [1;32mINFO [m [90m[DeviceManager][0m Device of:0000000000000003 connected
+[90m01:33:08.139[0m [1;32mINFO [m [90m[PortStatsCollector][0m Starting Port Stats collection thread for 00:00:00:00:00:00:00:03
+[90m01:33:08.139[0m [1;32mINFO [m [90m[InOrderFlowObjectiveManager][0m Invalidating cached pipeline behaviour for of:0000000000000003
+[90m01:33:08.142[0m [1;32mINFO [m [90m[GroupStatsCollector][0m Starting Group Stats collection thread for 00:00:00:00:00:00:00:03
+[90m01:33:08.142[0m [1;32mINFO [m [90m[InOrderFlowObjectiveManager][0m Driver ovs bound to device of:0000000000000003 ... initializing driver
+[90m01:33:08.144[0m [1;32mINFO [m [90m[MeterStatsCollector][0m Starting Meter Stats collection thread for 00:00:00:00:00:00:00:03
+[90m01:33:08.156[0m [1;32mINFO [m [90m[TopologyManager][0m Topology DefaultTopology{time=8275610564080, creationTime=1794792788150, computeCost=219801, clusters=2, devices=4, links=4} changed
+[90m01:33:08.160[0m [1;32mINFO [m [90m[OFChannelHandler][0m Processing 0 pending port status messages for 00:00:00:00:00:00:00:03
+[90m01:33:08.162[0m [1;32mINFO [m [90m[OpenFlowControllerImpl$OpenFlowSwitchAgent][0m Transitioned switch 00:00:00:00:00:00:00:03 to MASTER
+[90m01:33:08.163[0m [1;32mINFO [m [90m[OpenFlowControllerImpl$OpenFlowSwitchAgent][0m Purged pending stats 00:00:00:00:00:00:00:03
+[90m01:33:09.200[0m [1;32mINFO [m [90m[DistributedGroupStore][0m Group AUDIT: Setting device of:0000000000000003 initial AUDIT completed

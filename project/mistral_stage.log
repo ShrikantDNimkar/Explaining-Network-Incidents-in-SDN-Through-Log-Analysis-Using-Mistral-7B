@@ -1,0 +1,42 @@
+nohup: ignoring input
+congestion_r01 [mistral_raw]: 262.6s
+congestion_r01 [mistral_structured]: 483.6s
+congestion_r02 [mistral_raw]: 148.6s
+congestion_r02 [mistral_structured]: 442.4s
+congestion_r03 [mistral_raw]: 190.5s
+congestion_r03 [mistral_structured]: 498.4s
+congestion_r04 [mistral_raw]: 187.7s
+congestion_r04 [mistral_structured]: 451.4s
+congestion_r05 [mistral_raw]: 141.0s
+congestion_r05 [mistral_structured]: 398.6s
+congestion_r06 [mistral_raw]: 156.6s
+congestion_r06 [mistral_structured]: 437.9s
+host_disconnection_r01 [mistral_raw]: 228.3s
+Traceback (most recent call last):
+  File "mistral_explain.py", line 163, in <module>
+    main()
+  File "mistral_explain.py", line 154, in main
+    text, elapsed, evals = chat(args.model, builder(record), url=url)
+  File "mistral_explain.py", line 77, in chat
+    with urllib.request.urlopen(req, timeout=600) as resp:
+  File "/usr/lib/python3.8/urllib/request.py", line 222, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib/python3.8/urllib/request.py", line 525, in open
+    response = self._open(req, data)
+  File "/usr/lib/python3.8/urllib/request.py", line 542, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+  File "/usr/lib/python3.8/urllib/request.py", line 502, in _call_chain
+    result = func(*args)
+  File "/usr/lib/python3.8/urllib/request.py", line 1383, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+  File "/usr/lib/python3.8/urllib/request.py", line 1358, in do_open
+    r = h.getresponse()
+  File "/usr/lib/python3.8/http/client.py", line 1348, in getresponse
+    response.begin()
+  File "/usr/lib/python3.8/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.8/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/usr/lib/python3.8/socket.py", line 669, in readinto
+    return self._sock.recv_into(b)
+socket.timeout: timed out

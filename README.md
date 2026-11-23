@@ -1,0 +1,118 @@
+# Group 11 - SDN Incident Explanation with Mistral 7B (Docker Package)
+
+**Project:** Explaining Network Incidents in SDN Through Log Analysis Using Mistral 7B
+**Team:** Eris Mustafa, Shrikant Nimkar
+**Course:** Security of Software Defined Networking, Université du Luxembourg
+
+This package runs the complete project in a consistent, reproducible Docker
+environment: an emulated SDN topology (4 OVS switches in a ring, 6 hosts) under
+the ONOS controller, a 30-run incident campaign (link failure, switch failure,
+congestion, host disconnection, plus normal controls), and an analysis pipeline
+that explains each incident three ways: a rule-based baseline and Mistral 7B on
+raw and on structured evidence.
+
+## One-time preparation
+
+1. Requirements: a Linux machine with **Docker Engine + Compose v2** and
+   about 10 GB of free disk space. Any standard Ubuntu/Debian kernel already
+   ships the Open vSwitch datapath the emulation needs; no custom kernel is
+   required on native Linux. 8 GB RAM is enough unless you also run the CPU
+   Mistral calls on the same machine (then 16 GB is comfortable).
+2. Copy the project package `group11_sdn_mistral_project_v4` (provided by the
+   team) into the `project/` folder of this package, so that `project/`
+   directly contains `run_experiment.py`, `mistral_explain.py`, etc.
+   If you also want to replay the recorded evidence without running the
+   campaign yourself, copy the `runs/` directory of the completed project
+   into `project/runs/`.
+3. Ollama (the LLM server for Mistral 7B) is provisioned **automatically**:
+   when a mode needs it and it is missing, the launcher installs it, sets
+   `OLLAMA_HOST=0.0.0.0`, and pulls the `mistral` model. You can also do it
+   explicitly first:
+
+       ./group11 setup-ollama
+
+4. Verify everything is ready:
+
+       ./group11 check
+
+## Running
+
+Full experiment, testbed to final evaluation (campaign about 1.5 h, Mistral
+stage several hours on CPU):
+
+    ./group11 experiment
+
+Analysis-only replay of the recorded 30-run evidence (about 6.5 h for the 60
+Mistral calls on a 4-core laptop CPU; the rest is minutes):
+
+    ./group11 analysis
+
+Both modes are resumable: if interrupted, re-run the same command and it
+continues where it stopped.
+
+Convenience commands:
+
+    ./group11 up | down          start/stop the testbed
+    ./group11 shell              root shell inside the lab container
+    ./group11 logs [onos|sdn-lab]  follow container logs
+    ssh -p 2222 mininet@localhost  interactive lab access (mininet/mininet)
+
+## What each mode does
+
+| Mode | Steps |
+|---|---|
+| `experiment` | build images, start ONOS + lab, activate `openflow-base`/`openflow`/`fwd`, run the 30-run campaign (ONOS restart before every family and before every switch_failure run, per the project protocol), audit all 30 runs against acceptance criteria, regenerate the experiment matrix, preprocess evidence, rule baseline, Mistral stage (60 calls), evaluate. |
+| `analysis` | start the lab container only, preprocess the recorded evidence, rule baseline, Mistral stage (60 calls), evaluate. |
+
+## Results
+
+All outputs land in `project/runs/`:
+
+- `evaluation_summary.csv` - per-run metrics and per-condition averages
+- `experiment_matrix.json` - ground truth of the 30 runs
+- `<scenario>_r*/` - raw evidence, incident records, and the two Mistral
+  explanation files per run
+- `rubric_human_template.csv` - the joint human rubric (90 rows); it is the
+  one manual step and cannot be automated. After filling it, re-run
+  `./group11 experiment` (or `./group11 shell` then `python3 evaluate.py`)
+  to merge the human columns.
+
+Reference results from the project report:
+
+| Condition | Identification accuracy | Avg grounding (0-2) | Avg runtime |
+|---|---|---|---|
+| Baseline (rules) | 26/30 (86.7%) | 0.93 | < 1 ms |
+| Mistral-raw | 25/30 (83.3%) | 0.60 | 242 s |
+| Mistral-structured | 24/30 (80.0%) | 0.53 | 453 s |
+
+## Package contents
+
+```
+group11-docker-package/
+  README.md            this file
+  Dockerfile           lab image: ubuntu:20.04, Mininet 2.3.0, OVS, docker CLI, iperf, sshd:2222
+  entrypoint.sh        lab container entrypoint (module load, OVS start, sshd)
+  docker-compose.yml   ONOS (10.0.0.10) + privileged sdn-lab (10.0.0.20) on sdn-net
+  group11              one-command launcher (all modes)
+  project/             the project scripts go here (see preparation step 2)
+```
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---|---|
+| `host kernel has no Open vSwitch datapath` | `sudo apt-get install -y linux-modules-extra-$(uname -r) openvswitch-switch` and re-run. |
+| Port 8181 or 2222 already in use | edit the `ports:` lines in `docker-compose.yml`. |
+| `Ollama is installed but still unreachable` | ensure `OLLAMA_HOST=0.0.0.0` (systemd override is at `/etc/systemd/system/ollama.service.d/override.conf`), restart Ollama, and check the firewall (`sudo ufw status`; Docker's bridge must be allowed). |
+| Mistral calls very slow | normal on CPU (about 2-8 min per call); the iGPU on the reference laptop could not accelerate it either. |
+| Results owned by root | the lab container runs as root; inspect with `sudo` or `sudo chown -R $USER project/runs` afterwards. |
+| Running under WSL2 | stock WSL2 kernels lack Open vSwitch entirely; use a custom WSL2 kernel as documented in the project report, then run this package inside it. |
+
+## Security notes
+
+- Ollama with `OLLAMA_HOST=0.0.0.0` listens on all interfaces and has no
+  authentication: only run it on a trusted network (home/office LAN), and stop
+  it when not experimenting.
+- The lab container is privileged and mounts the Docker socket: that is what
+  Mininet's kernel datapath and the ONOS Karaf log capture require. Run this
+  package on a machine you control.

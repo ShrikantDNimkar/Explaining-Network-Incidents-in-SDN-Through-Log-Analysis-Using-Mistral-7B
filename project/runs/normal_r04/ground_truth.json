@@ -1,0 +1,20 @@
+{
+  "run_id": "normal_r04",
+  "scenario": "normal",
+  "injected_action": "no injection (negative control)",
+  "variant": {},
+  "inject_time": "2026-11-16T00:16:42.023Z",
+  "restore_time": "2026-11-16T00:17:35.630Z",
+  "observed_outcome": {
+    "recovered_after_restore": true,
+    "baseline_loss_pct": [
+      0.0,
+      0.0
+    ],
+    "post_inject_loss_pct": [
+      0.0,
+      0.0
+    ]
+  },
+  "affected_nodes": []
+}

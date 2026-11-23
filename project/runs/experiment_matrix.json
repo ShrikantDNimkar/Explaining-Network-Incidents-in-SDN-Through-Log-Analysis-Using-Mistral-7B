@@ -1,0 +1,766 @@
+[
+  {
+    "run_id": "congestion_r01",
+    "scenario": "congestion",
+    "injected_action": "netem delay=100ms loss=5% on s2-eth1",
+    "variant": {
+      "intf": "s2-eth1",
+      "delay_ms": 100,
+      "loss_pct": 5
+    },
+    "inject_time": "2026-11-16T14:17:09.603Z",
+    "restore_time": "2026-11-16T14:18:45.676Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "affected_nodes": [
+      "s2"
+    ]
+  },
+  {
+    "run_id": "congestion_r02",
+    "scenario": "congestion",
+    "injected_action": "netem delay=200ms loss=10% on s2-eth1",
+    "variant": {
+      "intf": "s2-eth1",
+      "delay_ms": 200,
+      "loss_pct": 10
+    },
+    "inject_time": "2026-11-16T14:19:14.186Z",
+    "restore_time": "2026-11-16T14:20:51.856Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        20.0
+      ]
+    },
+    "affected_nodes": [
+      "s2"
+    ]
+  },
+  {
+    "run_id": "congestion_r03",
+    "scenario": "congestion",
+    "injected_action": "netem delay=100ms loss=5% on s1-eth1",
+    "variant": {
+      "intf": "s1-eth1",
+      "delay_ms": 100,
+      "loss_pct": 5
+    },
+    "inject_time": "2026-11-16T15:02:47.083Z",
+    "restore_time": "2026-11-16T15:04:22.129Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "affected_nodes": [
+      "s1"
+    ]
+  },
+  {
+    "run_id": "congestion_r04",
+    "scenario": "congestion",
+    "injected_action": "netem delay=200ms loss=10% on s1-eth1",
+    "variant": {
+      "intf": "s1-eth1",
+      "delay_ms": 200,
+      "loss_pct": 10
+    },
+    "inject_time": "2026-11-16T15:04:50.758Z",
+    "restore_time": "2026-11-16T15:06:25.453Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        40.0,
+        0.0
+      ]
+    },
+    "affected_nodes": [
+      "s1"
+    ]
+  },
+  {
+    "run_id": "congestion_r05",
+    "scenario": "congestion",
+    "injected_action": "netem delay=150ms loss=8% on s3-eth1",
+    "variant": {
+      "intf": "s3-eth1",
+      "delay_ms": 150,
+      "loss_pct": 8
+    },
+    "inject_time": "2026-11-16T14:25:25.723Z",
+    "restore_time": "2026-11-16T14:26:51.508Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "affected_nodes": [
+      "s3"
+    ]
+  },
+  {
+    "run_id": "congestion_r06",
+    "scenario": "congestion",
+    "injected_action": "netem delay=250ms loss=15% on s3-eth1",
+    "variant": {
+      "intf": "s3-eth1",
+      "delay_ms": 250,
+      "loss_pct": 15
+    },
+    "inject_time": "2026-11-16T14:27:20.027Z",
+    "restore_time": "2026-11-16T14:28:57.751Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        20.0
+      ]
+    },
+    "affected_nodes": [
+      "s3"
+    ]
+  },
+  {
+    "run_id": "host_disconnection_r01",
+    "scenario": "host_disconnection",
+    "injected_action": "host h5",
+    "variant": {
+      "host": "h5"
+    },
+    "inject_time": "2026-11-16T14:38:06.719Z",
+    "restore_time": "2026-11-16T14:39:00.394Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "affected_nodes": [
+      "h5"
+    ]
+  },
+  {
+    "run_id": "host_disconnection_r02",
+    "scenario": "host_disconnection",
+    "injected_action": "host h6",
+    "variant": {
+      "host": "h6"
+    },
+    "inject_time": "2026-11-16T14:39:28.926Z",
+    "restore_time": "2026-11-16T14:40:22.503Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "affected_nodes": [
+      "h6"
+    ]
+  },
+  {
+    "run_id": "host_disconnection_r03",
+    "scenario": "host_disconnection",
+    "injected_action": "host h1",
+    "variant": {
+      "host": "h1"
+    },
+    "inject_time": "2026-11-16T14:40:51.230Z",
+    "restore_time": "2026-11-16T14:41:43.158Z",
+    "observed_outcome": {
+      "recovered_after_restore": false,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        100.0,
+        0.0
+      ]
+    },
+    "affected_nodes": [
+      "h1"
+    ]
+  },
+  {
+    "run_id": "host_disconnection_r04",
+    "scenario": "host_disconnection",
+    "injected_action": "host h4",
+    "variant": {
+      "host": "h4"
+    },
+    "inject_time": "2026-11-16T14:42:11.690Z",
+    "restore_time": "2026-11-16T14:43:20.556Z",
+    "observed_outcome": {
+      "recovered_after_restore": false,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        100.0,
+        0.0
+      ]
+    },
+    "affected_nodes": [
+      "h4"
+    ]
+  },
+  {
+    "run_id": "host_disconnection_r05",
+    "scenario": "host_disconnection",
+    "injected_action": "host h2",
+    "variant": {
+      "host": "h2"
+    },
+    "inject_time": "2026-11-16T14:43:49.070Z",
+    "restore_time": "2026-11-16T14:44:41.025Z",
+    "observed_outcome": {
+      "recovered_after_restore": false,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        100.0
+      ]
+    },
+    "affected_nodes": [
+      "h2"
+    ]
+  },
+  {
+    "run_id": "host_disconnection_r06",
+    "scenario": "host_disconnection",
+    "injected_action": "host h3",
+    "variant": {
+      "host": "h3"
+    },
+    "inject_time": "2026-11-16T14:45:09.602Z",
+    "restore_time": "2026-11-16T14:46:23.224Z",
+    "observed_outcome": {
+      "recovered_after_restore": false,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        100.0
+      ]
+    },
+    "affected_nodes": [
+      "h3"
+    ]
+  },
+  {
+    "run_id": "link_failure_r01",
+    "scenario": "link_failure",
+    "injected_action": "link s1-s2",
+    "variant": {
+      "link": [
+        "s1",
+        "s2"
+      ]
+    },
+    "inject_time": "2026-11-16T00:20:48.400Z",
+    "restore_time": "2026-11-16T00:21:41.962Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "affected_nodes": [
+      "s1",
+      "s2"
+    ]
+  },
+  {
+    "run_id": "link_failure_r02",
+    "scenario": "link_failure",
+    "injected_action": "link s2-s3",
+    "variant": {
+      "link": [
+        "s2",
+        "s3"
+      ]
+    },
+    "inject_time": "2026-11-16T00:22:10.570Z",
+    "restore_time": "2026-11-16T00:23:04.186Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "affected_nodes": [
+      "s2",
+      "s3"
+    ]
+  },
+  {
+    "run_id": "link_failure_r03",
+    "scenario": "link_failure",
+    "injected_action": "link s3-s4",
+    "variant": {
+      "link": [
+        "s3",
+        "s4"
+      ]
+    },
+    "inject_time": "2026-11-16T00:23:32.691Z",
+    "restore_time": "2026-11-16T00:24:26.295Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "affected_nodes": [
+      "s3",
+      "s4"
+    ]
+  },
+  {
+    "run_id": "link_failure_r04",
+    "scenario": "link_failure",
+    "injected_action": "link s4-s1",
+    "variant": {
+      "link": [
+        "s4",
+        "s1"
+      ]
+    },
+    "inject_time": "2026-11-16T00:24:54.799Z",
+    "restore_time": "2026-11-16T00:25:48.375Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "affected_nodes": [
+      "s4",
+      "s1"
+    ]
+  },
+  {
+    "run_id": "link_failure_r05",
+    "scenario": "link_failure",
+    "injected_action": "link s1-s2",
+    "variant": {
+      "link": [
+        "s1",
+        "s2"
+      ]
+    },
+    "inject_time": "2026-11-16T00:26:16.882Z",
+    "restore_time": "2026-11-16T00:27:10.468Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "affected_nodes": [
+      "s1",
+      "s2"
+    ]
+  },
+  {
+    "run_id": "link_failure_r06",
+    "scenario": "link_failure",
+    "injected_action": "link s3-s4",
+    "variant": {
+      "link": [
+        "s3",
+        "s4"
+      ]
+    },
+    "inject_time": "2026-11-16T00:27:38.962Z",
+    "restore_time": "2026-11-16T00:28:32.544Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "affected_nodes": [
+      "s3",
+      "s4"
+    ]
+  },
+  {
+    "run_id": "normal_r01",
+    "scenario": "normal",
+    "injected_action": "no injection (negative control)",
+    "variant": {},
+    "inject_time": "2026-11-16T00:12:35.810Z",
+    "restore_time": "2026-11-16T00:13:29.378Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "affected_nodes": []
+  },
+  {
+    "run_id": "normal_r02",
+    "scenario": "normal",
+    "injected_action": "no injection (negative control)",
+    "variant": {},
+    "inject_time": "2026-11-16T00:13:57.876Z",
+    "restore_time": "2026-11-16T00:14:51.447Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "affected_nodes": []
+  },
+  {
+    "run_id": "normal_r03",
+    "scenario": "normal",
+    "injected_action": "no injection (negative control)",
+    "variant": {},
+    "inject_time": "2026-11-16T00:15:19.950Z",
+    "restore_time": "2026-11-16T00:16:13.538Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "affected_nodes": []
+  },
+  {
+    "run_id": "normal_r04",
+    "scenario": "normal",
+    "injected_action": "no injection (negative control)",
+    "variant": {},
+    "inject_time": "2026-11-16T00:16:42.023Z",
+    "restore_time": "2026-11-16T00:17:35.630Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "affected_nodes": []
+  },
+  {
+    "run_id": "normal_r05",
+    "scenario": "normal",
+    "injected_action": "no injection (negative control)",
+    "variant": {},
+    "inject_time": "2026-11-16T00:18:04.162Z",
+    "restore_time": "2026-11-16T00:18:57.715Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "affected_nodes": []
+  },
+  {
+    "run_id": "normal_r06",
+    "scenario": "normal",
+    "injected_action": "no injection (negative control)",
+    "variant": {},
+    "inject_time": "2026-11-16T00:19:26.361Z",
+    "restore_time": "2026-11-16T00:20:19.931Z",
+    "observed_outcome": {
+      "recovered_after_restore": true,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        0.0
+      ]
+    },
+    "affected_nodes": []
+  },
+  {
+    "run_id": "switch_failure_r01",
+    "scenario": "switch_failure",
+    "injected_action": "switch s2",
+    "variant": {
+      "switch": "s2",
+      "isolates": [
+        "h2",
+        "h5"
+      ]
+    },
+    "inject_time": "2026-11-16T00:29:01.018Z",
+    "restore_time": "2026-11-16T00:29:53.221Z",
+    "observed_outcome": {
+      "recovered_after_restore": false,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        100.0
+      ]
+    },
+    "affected_nodes": [
+      "s2",
+      "h2",
+      "h5"
+    ]
+  },
+  {
+    "run_id": "switch_failure_r02",
+    "scenario": "switch_failure",
+    "injected_action": "switch s3",
+    "variant": {
+      "switch": "s3",
+      "isolates": [
+        "h3",
+        "h6"
+      ]
+    },
+    "inject_time": "2026-11-16T01:31:53.754Z",
+    "restore_time": "2026-11-16T01:33:07.640Z",
+    "observed_outcome": {
+      "recovered_after_restore": false,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        100.0
+      ]
+    },
+    "affected_nodes": [
+      "s3",
+      "h3",
+      "h6"
+    ]
+  },
+  {
+    "run_id": "switch_failure_r03",
+    "scenario": "switch_failure",
+    "injected_action": "switch s4",
+    "variant": {
+      "switch": "s4",
+      "isolates": [
+        "h4"
+      ]
+    },
+    "inject_time": "2026-11-16T14:00:28.831Z",
+    "restore_time": "2026-11-16T14:01:45.772Z",
+    "observed_outcome": {
+      "recovered_after_restore": false,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        100.0,
+        0.0
+      ]
+    },
+    "affected_nodes": [
+      "s4",
+      "h4"
+    ]
+  },
+  {
+    "run_id": "switch_failure_r04",
+    "scenario": "switch_failure",
+    "injected_action": "switch s2",
+    "variant": {
+      "switch": "s2",
+      "isolates": [
+        "h2",
+        "h5"
+      ]
+    },
+    "inject_time": "2026-11-16T14:04:30.630Z",
+    "restore_time": "2026-11-16T14:05:22.965Z",
+    "observed_outcome": {
+      "recovered_after_restore": false,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        100.0
+      ]
+    },
+    "affected_nodes": [
+      "s2",
+      "h2",
+      "h5"
+    ]
+  },
+  {
+    "run_id": "switch_failure_r05",
+    "scenario": "switch_failure",
+    "injected_action": "switch s3",
+    "variant": {
+      "switch": "s3",
+      "isolates": [
+        "h3",
+        "h6"
+      ]
+    },
+    "inject_time": "2026-11-16T14:08:04.379Z",
+    "restore_time": "2026-11-16T14:09:18.374Z",
+    "observed_outcome": {
+      "recovered_after_restore": false,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        0.0,
+        100.0
+      ]
+    },
+    "affected_nodes": [
+      "s3",
+      "h3",
+      "h6"
+    ]
+  },
+  {
+    "run_id": "switch_failure_r06",
+    "scenario": "switch_failure",
+    "injected_action": "switch s4",
+    "variant": {
+      "switch": "s4",
+      "isolates": [
+        "h4"
+      ]
+    },
+    "inject_time": "2026-11-16T14:12:03.666Z",
+    "restore_time": "2026-11-16T14:13:20.620Z",
+    "observed_outcome": {
+      "recovered_after_restore": false,
+      "baseline_loss_pct": [
+        0.0,
+        0.0
+      ],
+      "post_inject_loss_pct": [
+        100.0,
+        0.0
+      ]
+    },
+    "affected_nodes": [
+      "s4",
+      "h4"
+    ]
+  }
+]

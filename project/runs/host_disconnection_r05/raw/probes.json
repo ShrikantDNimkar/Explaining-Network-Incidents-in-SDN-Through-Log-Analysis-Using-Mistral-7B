@@ -1,0 +1,110 @@
+[
+  {
+    "time": "2026-11-16T14:43:48.252Z",
+    "src": "h1",
+    "dst": "10.1.0.4",
+    "output_tail": "--- 10.1.0.4 ping statistics ---\n5 packets transmitted, 5 received, 0% packet loss, time 815ms\nrtt min/avg/max/mdev = 0.047/0.158/0.531/0.187 ms",
+    "sent": 5,
+    "received": 5,
+    "loss_pct": 0.0,
+    "avg_rtt_ms": 0.158,
+    "label": "baseline"
+  },
+  {
+    "time": "2026-11-16T14:43:49.068Z",
+    "src": "h2",
+    "dst": "10.1.0.3",
+    "output_tail": "--- 10.1.0.3 ping statistics ---\n5 packets transmitted, 5 received, 0% packet loss, time 814ms\nrtt min/avg/max/mdev = 0.045/0.131/0.456/0.162 ms",
+    "sent": 5,
+    "received": 5,
+    "loss_pct": 0.0,
+    "avg_rtt_ms": 0.131,
+    "label": "baseline"
+  },
+  {
+    "label": "baseline_iperf",
+    "time": "2026-11-16T14:43:49.070Z",
+    "client": "h1",
+    "server": "10.1.0.4",
+    "udp": false,
+    "raw_head": "{\n\t\"start\":\t{",
+    "throughput_mbps": 0.0,
+    "retransmits": null
+  },
+  {
+    "time": "2026-11-16T14:43:59.977Z",
+    "src": "h1",
+    "dst": "10.1.0.4",
+    "output_tail": "--- 10.1.0.4 ping statistics ---\n5 packets transmitted, 5 received, 0% packet loss, time 819ms\nrtt min/avg/max/mdev = 0.049/0.218/0.518/0.185 ms",
+    "sent": 5,
+    "received": 5,
+    "loss_pct": 0.0,
+    "avg_rtt_ms": 0.218,
+    "label": "post_inject_10s"
+  },
+  {
+    "time": "2026-11-16T14:43:59.979Z",
+    "src": "h2",
+    "dst": "10.1.0.3",
+    "output_tail": "ping: connect: Network is unreachable",
+    "sent": 5,
+    "received": 0,
+    "loss_pct": 100.0,
+    "avg_rtt_ms": null,
+    "label": "post_inject_10s"
+  },
+  {
+    "time": "2026-11-16T14:44:41.020Z",
+    "src": "h1",
+    "dst": "10.1.0.4",
+    "output_tail": "--- 10.1.0.4 ping statistics ---\n5 packets transmitted, 5 received, 0% packet loss, time 817ms\nrtt min/avg/max/mdev = 0.044/1.278/5.271/2.019 ms",
+    "sent": 5,
+    "received": 5,
+    "loss_pct": 0.0,
+    "avg_rtt_ms": 1.278,
+    "label": "post_inject_50s"
+  },
+  {
+    "time": "2026-11-16T14:44:41.022Z",
+    "src": "h2",
+    "dst": "10.1.0.3",
+    "output_tail": "ping: connect: Network is unreachable",
+    "sent": 5,
+    "received": 0,
+    "loss_pct": 100.0,
+    "avg_rtt_ms": null,
+    "label": "post_inject_50s"
+  },
+  {
+    "label": "post_inject_iperf",
+    "time": "2026-11-16T14:44:41.025Z",
+    "client": "h1",
+    "server": "10.1.0.4",
+    "udp": false,
+    "raw_head": "{\n\t\"start\":\t{",
+    "throughput_mbps": 0.0,
+    "retransmits": null
+  },
+  {
+    "time": "2026-11-16T14:44:56.860Z",
+    "src": "h1",
+    "dst": "10.1.0.4",
+    "output_tail": "--- 10.1.0.4 ping statistics ---\n5 packets transmitted, 5 received, 0% packet loss, time 816ms\nrtt min/avg/max/mdev = 0.045/0.136/0.487/0.175 ms",
+    "sent": 5,
+    "received": 5,
+    "loss_pct": 0.0,
+    "avg_rtt_ms": 0.136,
+    "label": "recovery"
+  },
+  {
+    "time": "2026-11-16T14:44:57.676Z",
+    "src": "h2",
+    "dst": "10.1.0.3",
+    "output_tail": "--- 10.1.0.3 ping statistics ---\n5 packets transmitted, 5 received, 0% packet loss, time 813ms\nrtt min/avg/max/mdev = 0.048/2.101/9.908/3.905 ms",
+    "sent": 5,
+    "received": 5,
+    "loss_pct": 0.0,
+    "avg_rtt_ms": 2.101,
+    "label": "recovery"
+  }
+]

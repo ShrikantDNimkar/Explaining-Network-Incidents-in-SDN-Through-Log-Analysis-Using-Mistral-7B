@@ -1,0 +1,6 @@
+nohup: ignoring input
+Waiting 25s for ONOS to discover hosts/links...
+[congestion_r03] done: netem delay=100ms loss=5% on s1-eth1 (recovered=True)
+[congestion_r04] done: netem delay=200ms loss=10% on s1-eth1 (recovered=True)
+
+All runs complete. Evidence in runs/

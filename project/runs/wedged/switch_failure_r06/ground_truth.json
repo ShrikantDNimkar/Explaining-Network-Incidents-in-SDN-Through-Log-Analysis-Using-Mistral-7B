@@ -1,0 +1,28 @@
+{
+  "run_id": "switch_failure_r06",
+  "scenario": "switch_failure",
+  "injected_action": "switch s4",
+  "variant": {
+    "switch": "s4",
+    "isolates": [
+      "h4"
+    ]
+  },
+  "inject_time": "2026-11-16T00:36:21.252Z",
+  "restore_time": "2026-11-16T00:37:20.805Z",
+  "observed_outcome": {
+    "recovered_after_restore": false,
+    "baseline_loss_pct": [
+      100.0,
+      100.0
+    ],
+    "post_inject_loss_pct": [
+      100.0,
+      100.0
+    ]
+  },
+  "affected_nodes": [
+    "s4",
+    "h4"
+  ]
+}

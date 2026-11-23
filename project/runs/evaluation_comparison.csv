@@ -1,0 +1,4 @@
+condition,n_runs,identification_accuracy_pct,avg_grounding_0_2,avg_unsupported_assertions,avg_runtime_ms
+baseline,30,86.7,0.93,0.07,0.0
+mistral_raw,30,83.3,0.6,0.5,241545.0
+mistral_structured,30,80.0,0.53,0.5,453413.0

@@ -1,0 +1,16 @@
+{
+  "condition": "baseline",
+  "elapsed_ms": 0,
+  "explanation": {
+    "category": "link_failure",
+    "network_impact": "Switch-to-switch link(s) s1-s2 left the topology; traffic must use the redundant path.",
+    "likely_cause": "A switch-to-switch link was disabled.",
+    "evidence": [
+      "link pairs ['s1-s2'] absent in phase post_inject_10s"
+    ],
+    "operator_checks": [
+      "Verify interface state on both endpoints with ip link",
+      "Confirm the alternate path carries the traffic (tracepath / flow counters)"
+    ]
+  }
+}

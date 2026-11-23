@@ -1,0 +1,53 @@
+# =============================================================================
+# Group 11 testbed - same architecture as the project reference machine:
+#   onos    ONOS controller on the sdn-net bridge network at 10.0.0.10
+#   sdn-lab privileged Mininet 2.3.0 + OVS lab at 10.0.0.20, everything baked
+#           into the image built from ./Dockerfile
+# Launch from the package root:   ./group11 up | experiment | analysis
+# =============================================================================
+
+name: group11
+
+services:
+  onos:
+    image: onosproject/onos:latest
+    container_name: onos
+    networks:
+      sdn-net:
+        ipv4_address: 10.0.0.10
+    ports:
+      - "8181:8181"   # ONOS REST + web GUI at http://localhost:8181 (onos/rocks)
+    restart: unless-stopped
+
+  sdn-lab:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: group11/sdn-lab:latest
+    container_name: sdn-lab
+    privileged: true
+    extra_hosts:
+      # Ollama on the host is reached at host.docker.internal (needs OLLAMA_HOST=0.0.0.0 there)
+      - "host.docker.internal:host-gateway"
+    volumes:
+      # project scripts live in the package; results (runs/) persist here
+      - ./project:/home/mininet/group11_sdn_mistral_project
+      # Karaf log window capture: the collector runs `docker logs onos` from inside the lab
+      - /var/run/docker.sock:/var/run/docker.sock
+      # host kernel module metadata, so OVS built-in/module resolution works in the privileged container
+      - /lib/modules:/lib/modules:ro
+    networks:
+      sdn-net:
+        ipv4_address: 10.0.0.20
+    ports:
+      - "2222:2222"   # ssh -p 2222 mininet@localhost (course-lab workflow)
+    depends_on:
+      - onos
+    restart: unless-stopped
+
+networks:
+  sdn-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24

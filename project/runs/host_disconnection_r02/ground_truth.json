@@ -1,0 +1,24 @@
+{
+  "run_id": "host_disconnection_r02",
+  "scenario": "host_disconnection",
+  "injected_action": "host h6",
+  "variant": {
+    "host": "h6"
+  },
+  "inject_time": "2026-11-16T14:39:28.926Z",
+  "restore_time": "2026-11-16T14:40:22.503Z",
+  "observed_outcome": {
+    "recovered_after_restore": true,
+    "baseline_loss_pct": [
+      0.0,
+      0.0
+    ],
+    "post_inject_loss_pct": [
+      0.0,
+      0.0
+    ]
+  },
+  "affected_nodes": [
+    "h6"
+  ]
+}

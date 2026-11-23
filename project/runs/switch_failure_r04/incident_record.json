@@ -1,0 +1,295 @@
+{
+  "run_id": "switch_failure_r04",
+  "karaf_events": [
+    {
+      "timestamp": "",
+      "message": "\u001b[90m14:04:30.725\u001b[0m \u001b[1;33mWARN \u001b[m \u001b[90m[OFChannelHandler]\u001b[0m Dispatcher interrupted"
+    },
+    {
+      "timestamp": "",
+      "message": "\u001b[90m14:04:30.728\u001b[0m \u001b[1;32mINFO \u001b[m \u001b[90m[DeviceManager]\u001b[0m Device of:0000000000000002 disconnected from this node: 10.0.0.10"
+    },
+    {
+      "timestamp": "",
+      "message": "\u001b[90m14:04:30.728\u001b[0m \u001b[1;32mINFO \u001b[m \u001b[90m[DeviceManager]\u001b[0m Device of:0000000000000002 is fully disconnected from the cluster"
+    },
+    {
+      "timestamp": "",
+      "message": "\u001b[90m14:04:30.776\u001b[0m \u001b[1;32mINFO \u001b[m \u001b[90m[TopologyManager]\u001b[0m Topology DefaultTopology{time=1862005861745, creationTime=1794837870769, computeCost=480400, clusters=1, devices=3, links=4} changed"
+    },
+    {
+      "timestamp": "",
+      "message": "\u001b[90m14:04:35.491\u001b[0m \u001b[1;33mWARN \u001b[m \u001b[90m[OFChannelHandler]\u001b[0m Dropping messages for switch NiciraSwitchHandshaker{session=10.0.0.20:60332, dpid=00:00:00:00:00:00:00:02} because channel is not connected: [OFGroupStatsRequestVer13(xid=29, flags=[], group=all)]"
+    },
+    {
+      "timestamp": "",
+      "message": "\u001b[90m14:04:35.492\u001b[0m \u001b[1;33mWARN \u001b[m \u001b[90m[NiciraSwitchHandshaker]\u001b[0m Dropping messages for switch 00:00:00:00:00:00:00:02 because channel is not connected: [OFGroupStatsRequestVer13(xid=29, flags=[], group=all)]"
+    },
+    {
+      "timestamp": "",
+      "message": "\u001b[90m14:04:35.492\u001b[0m \u001b[1;33mWARN \u001b[m \u001b[90m[OFChannelHandler]\u001b[0m Dropping messages for switch NiciraSwitchHandshaker{session=10.0.0.20:60332, dpid=00:00:00:00:00:00:00:02} because channel is not connected: [OFGroupDescStatsRequestVer13(xid=30, flags=[])]"
+    },
+    {
+      "timestamp": "",
+      "message": "\u001b[90m14:04:35.493\u001b[0m \u001b[1;33mWARN \u001b[m \u001b[90m[NiciraSwitchHandshaker]\u001b[0m Dropping messages for switch 00:00:00:00:00:00:00:02 because channel is not connected: [OFGroupDescStatsRequestVer13(xid=30, flags=[])]"
+    },
+    {
+      "timestamp": "",
+      "message": "\u001b[90m14:04:35.493\u001b[0m \u001b[1;33mWARN \u001b[m \u001b[90m[OFChannelHandler]\u001b[0m Dropping messages for switch NiciraSwitchHandshaker{session=10.0.0.20:60332, dpid=00:00:00:00:00:00:00:02} because channel is not connected: [OFMeterStatsRequestVer13(xid=0, flags=[], meterId=-1)]"
+    },
+    {
+      "timestamp": "",
+      "message": "\u001b[90m14:04:35.494\u001b[0m \u001b[1;33mWARN \u001b[m \u001b[90m[NiciraSwitchHandshaker]\u001b[0m Dropping messages for switch 00:00:00:00:00:00:00:02 because channel is not connected: [OFMeterStatsRequestVer13(xid=0, flags=[], meterId=-1)]"
+    },
+    {
+      "timestamp": "",
+      "message": "\u001b[90m14:05:23.313\u001b[0m \u001b[1;33mWARN \u001b[m \u001b[90m[OFChannelHandler]\u001b[0m Config Reply from switch [/10.0.0.20:43944 DPID[00:00:00:00:00:00:00:02]] has miss length set to 128"
+    }
+  ],
+  "controller_state_by_phase": {
+    "baseline": {
+      "devices_available": {
+        "of:0000000000000003": true,
+        "of:0000000000000004": true,
+        "of:0000000000000001": true,
+        "of:0000000000000002": true
+      },
+      "link_pairs": [
+        "s1-s2",
+        "s1-s4",
+        "s2-s3",
+        "s3-s4"
+      ],
+      "host_ips": [
+        "10.1.0.1",
+        "10.1.0.2",
+        "10.1.0.3",
+        "10.1.0.4",
+        "10.1.0.5",
+        "10.1.0.6"
+      ],
+      "flow_count_total": 86
+    },
+    "post_inject_10s": {
+      "devices_available": {
+        "of:0000000000000003": true,
+        "of:0000000000000004": true,
+        "of:0000000000000001": true,
+        "of:0000000000000002": false
+      },
+      "link_pairs": [
+        "s1-s4",
+        "s3-s4"
+      ],
+      "host_ips": [
+        "10.1.0.1",
+        "10.1.0.3",
+        "10.1.0.4",
+        "10.1.0.6"
+      ],
+      "flow_count_total": 78
+    },
+    "post_inject_30s": {
+      "devices_available": {
+        "of:0000000000000003": true,
+        "of:0000000000000004": true,
+        "of:0000000000000001": true,
+        "of:0000000000000002": false
+      },
+      "link_pairs": [
+        "s1-s4",
+        "s3-s4"
+      ],
+      "host_ips": [
+        "10.1.0.1",
+        "10.1.0.3",
+        "10.1.0.4",
+        "10.1.0.6"
+      ],
+      "flow_count_total": 38
+    },
+    "post_inject_50s": {
+      "devices_available": {
+        "of:0000000000000003": true,
+        "of:0000000000000004": true,
+        "of:0000000000000001": true,
+        "of:0000000000000002": false
+      },
+      "link_pairs": [
+        "s1-s4",
+        "s3-s4"
+      ],
+      "host_ips": [
+        "10.1.0.1",
+        "10.1.0.3",
+        "10.1.0.4",
+        "10.1.0.6"
+      ],
+      "flow_count_total": 38
+    },
+    "recovery": {
+      "devices_available": {
+        "of:0000000000000003": true,
+        "of:0000000000000004": true,
+        "of:0000000000000001": true,
+        "of:0000000000000002": true
+      },
+      "link_pairs": [
+        "s1-s4",
+        "s3-s4"
+      ],
+      "host_ips": [
+        "10.1.0.1",
+        "10.1.0.3",
+        "10.1.0.4",
+        "10.1.0.6"
+      ],
+      "flow_count_total": 38
+    }
+  },
+  "ovs_flow_summary": {
+    "post_inject_10s": {
+      "s1": {
+        "total_rules": 14,
+        "drop_rules": 14
+      },
+      "s2": {
+        "total_rules": 0,
+        "drop_rules": 0
+      },
+      "s3": {
+        "total_rules": 22,
+        "drop_rules": 22
+      },
+      "s4": {
+        "total_rules": 16,
+        "drop_rules": 16
+      }
+    },
+    "post_inject_30s": {
+      "s1": {
+        "total_rules": 4,
+        "drop_rules": 4
+      },
+      "s2": {
+        "total_rules": 0,
+        "drop_rules": 0
+      },
+      "s3": {
+        "total_rules": 4,
+        "drop_rules": 4
+      },
+      "s4": {
+        "total_rules": 4,
+        "drop_rules": 4
+      }
+    },
+    "post_inject_50s": {
+      "s1": {
+        "total_rules": 4,
+        "drop_rules": 4
+      },
+      "s2": {
+        "total_rules": 0,
+        "drop_rules": 0
+      },
+      "s3": {
+        "total_rules": 4,
+        "drop_rules": 4
+      },
+      "s4": {
+        "total_rules": 4,
+        "drop_rules": 4
+      }
+    }
+  },
+  "connectivity": {
+    "pings": {
+      "baseline": [
+        {
+          "src": "h1",
+          "dst": "10.1.0.4",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 0.062
+        },
+        {
+          "src": "h2",
+          "dst": "10.1.0.3",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 0.05
+        }
+      ],
+      "post_inject_10s": [
+        {
+          "src": "h1",
+          "dst": "10.1.0.4",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 0.175
+        },
+        {
+          "src": "h2",
+          "dst": "10.1.0.3",
+          "loss_pct": 100.0,
+          "avg_rtt_ms": null
+        }
+      ],
+      "post_inject_50s": [
+        {
+          "src": "h1",
+          "dst": "10.1.0.4",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 1.536
+        },
+        {
+          "src": "h2",
+          "dst": "10.1.0.3",
+          "loss_pct": 100.0,
+          "avg_rtt_ms": null
+        }
+      ],
+      "recovery": [
+        {
+          "src": "h1",
+          "dst": "10.1.0.4",
+          "loss_pct": 0.0,
+          "avg_rtt_ms": 0.129
+        },
+        {
+          "src": "h2",
+          "dst": "10.1.0.3",
+          "loss_pct": 100.0,
+          "avg_rtt_ms": null
+        }
+      ]
+    },
+    "iperf": [
+      {
+        "label": "baseline_iperf",
+        "throughput_mbps": 0.0,
+        "lost_pct": null,
+        "retransmits": null,
+        "udp": false
+      },
+      {
+        "label": "post_inject_iperf",
+        "throughput_mbps": 0.0,
+        "lost_pct": null,
+        "retransmits": null,
+        "udp": false
+      }
+    ]
+  },
+  "raw_log_excerpt": [
+    "\u001b[90m14:04:30.725\u001b[0m \u001b[1;33mWARN \u001b[m \u001b[90m[OFChannelHandler]\u001b[0m Dispatcher interrupted",
+    "\u001b[90m14:04:30.728\u001b[0m \u001b[1;32mINFO \u001b[m \u001b[90m[DeviceManager]\u001b[0m Device of:0000000000000002 disconnected from this node: 10.0.0.10",
+    "\u001b[90m14:04:30.728\u001b[0m \u001b[1;32mINFO \u001b[m \u001b[90m[DeviceManager]\u001b[0m Device of:0000000000000002 is fully disconnected from the cluster",
+    "\u001b[90m14:04:30.776\u001b[0m \u001b[1;32mINFO \u001b[m \u001b[90m[TopologyManager]\u001b[0m Topology DefaultTopology{time=1862005861745, creationTime=1794837870769, computeCost=480400, clusters=1, devices=3, links=4} changed",
+    "\u001b[90m14:04:35.491\u001b[0m \u001b[1;33mWARN \u001b[m \u001b[90m[OFChannelHandler]\u001b[0m Dropping messages for switch NiciraSwitchHandshaker{session=10.0.0.20:60332, dpid=00:00:00:00:00:00:00:02} because channel is not connected: [OFGroupStatsRequestVer13(xid=29, flags=[], group=all)]",
+    "\u001b[90m14:04:35.492\u001b[0m \u001b[1;33mWARN \u001b[m \u001b[90m[NiciraSwitchHandshaker]\u001b[0m Dropping messages for switch 00:00:00:00:00:00:00:02 because channel is not connected: [OFGroupStatsRequestVer13(xid=29, flags=[], group=all)]",
+    "\u001b[90m14:04:35.492\u001b[0m \u001b[1;33mWARN \u001b[m \u001b[90m[OFChannelHandler]\u001b[0m Dropping messages for switch NiciraSwitchHandshaker{session=10.0.0.20:60332, dpid=00:00:00:00:00:00:00:02} because channel is not connected: [OFGroupDescStatsRequestVer13(xid=30, flags=[])]",
+    "\u001b[90m14:04:35.493\u001b[0m \u001b[1;33mWARN \u001b[m \u001b[90m[NiciraSwitchHandshaker]\u001b[0m Dropping messages for switch 00:00:00:00:00:00:00:02 because channel is not connected: [OFGroupDescStatsRequestVer13(xid=30, flags=[])]",
+    "\u001b[90m14:04:35.493\u001b[0m \u001b[1;33mWARN \u001b[m \u001b[90m[OFChannelHandler]\u001b[0m Dropping messages for switch NiciraSwitchHandshaker{session=10.0.0.20:60332, dpid=00:00:00:00:00:00:00:02} because channel is not connected: [OFMeterStatsRequestVer13(xid=0, flags=[], meterId=-1)]",
+    "\u001b[90m14:04:35.494\u001b[0m \u001b[1;33mWARN \u001b[m \u001b[90m[NiciraSwitchHandshaker]\u001b[0m Dropping messages for switch 00:00:00:00:00:00:00:02 because channel is not connected: [OFMeterStatsRequestVer13(xid=0, flags=[], meterId=-1)]",
+    "\u001b[90m14:05:23.313\u001b[0m \u001b[1;33mWARN \u001b[m \u001b[90m[OFChannelHandler]\u001b[0m Config Reply from switch [/10.0.0.20:43944 DPID[00:00:00:00:00:00:00:02]] has miss length set to 128"
+  ]
+}

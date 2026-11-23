@@ -1,0 +1,28 @@
+{
+  "run_id": "link_failure_r02",
+  "scenario": "link_failure",
+  "injected_action": "link s2-s3",
+  "variant": {
+    "link": [
+      "s2",
+      "s3"
+    ]
+  },
+  "inject_time": "2026-11-16T00:22:10.570Z",
+  "restore_time": "2026-11-16T00:23:04.186Z",
+  "observed_outcome": {
+    "recovered_after_restore": true,
+    "baseline_loss_pct": [
+      0.0,
+      0.0
+    ],
+    "post_inject_loss_pct": [
+      0.0,
+      0.0
+    ]
+  },
+  "affected_nodes": [
+    "s2",
+    "s3"
+  ]
+}

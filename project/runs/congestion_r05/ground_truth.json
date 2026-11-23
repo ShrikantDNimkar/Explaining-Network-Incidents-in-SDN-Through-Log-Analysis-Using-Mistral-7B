@@ -1,0 +1,26 @@
+{
+  "run_id": "congestion_r05",
+  "scenario": "congestion",
+  "injected_action": "netem delay=150ms loss=8% on s3-eth1",
+  "variant": {
+    "intf": "s3-eth1",
+    "delay_ms": 150,
+    "loss_pct": 8
+  },
+  "inject_time": "2026-11-16T14:25:25.723Z",
+  "restore_time": "2026-11-16T14:26:51.508Z",
+  "observed_outcome": {
+    "recovered_after_restore": true,
+    "baseline_loss_pct": [
+      0.0,
+      0.0
+    ],
+    "post_inject_loss_pct": [
+      0.0,
+      0.0
+    ]
+  },
+  "affected_nodes": [
+    "s3"
+  ]
+}

@@ -1,0 +1,22 @@
+2026-11-16T00:13:56.140Z | run normal_r02 started, scenario=normal
+2026-11-16T00:13:56.236Z | evidence snapshot phase baseline
+2026-11-16T00:13:57.052Z | ping h1->10.1.0.4 [baseline] loss=0.0%
+2026-11-16T00:13:57.872Z | ping h2->10.1.0.3 [baseline] loss=0.0%
+2026-11-16T00:13:57.876Z | INJECTED: no injection (negative control) at 2026-11-16T00:13:57.876Z
+2026-11-16T00:13:57.876Z | wait 10s (post-inject stabilisation)
+2026-11-16T00:14:07.973Z | evidence snapshot phase post_inject_10s
+2026-11-16T00:14:08.792Z | ping h1->10.1.0.4 [post_inject_10s] loss=0.0%
+2026-11-16T00:14:09.608Z | ping h2->10.1.0.3 [post_inject_10s] loss=0.0%
+2026-11-16T00:14:09.608Z | wait 20s (mid observation)
+2026-11-16T00:14:29.710Z | evidence snapshot phase post_inject_30s
+2026-11-16T00:14:29.710Z | wait 20s (late observation)
+2026-11-16T00:14:49.813Z | evidence snapshot phase post_inject_50s
+2026-11-16T00:14:50.628Z | ping h1->10.1.0.4 [post_inject_50s] loss=0.0%
+2026-11-16T00:14:51.444Z | ping h2->10.1.0.3 [post_inject_50s] loss=0.0%
+2026-11-16T00:14:51.447Z | RESTORED at 2026-11-16T00:14:51.447Z
+2026-11-16T00:14:51.447Z | wait 15s (recovery stabilisation)
+2026-11-16T00:15:07.280Z | ping h1->10.1.0.4 [recovery] loss=0.0%
+2026-11-16T00:15:08.096Z | ping h2->10.1.0.3 [recovery] loss=0.0%
+2026-11-16T00:15:08.186Z | evidence snapshot phase recovery
+2026-11-16T00:15:08.214Z | karaf window: rc=0 lines=0
+2026-11-16T00:15:08.214Z | wait 10s (cooldown)

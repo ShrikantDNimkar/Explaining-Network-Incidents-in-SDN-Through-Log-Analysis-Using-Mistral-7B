@@ -1,0 +1,10 @@
+nohup: ignoring input
+Waiting 25s for ONOS to discover hosts/links...
+[host_disconnection_r01] done: host h5 (recovered=True)
+[host_disconnection_r02] done: host h6 (recovered=True)
+[host_disconnection_r03] done: host h1 (recovered=False)
+[host_disconnection_r04] done: host h4 (recovered=False)
+[host_disconnection_r05] done: host h2 (recovered=False)
+[host_disconnection_r06] done: host h3 (recovered=False)
+
+All runs complete. Evidence in runs/

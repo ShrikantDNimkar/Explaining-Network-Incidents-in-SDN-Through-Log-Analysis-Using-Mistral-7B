@@ -1,0 +1,419 @@
+#!/usr/bin/env bash
+# =============================================================================
+# Group 11 - one-command launcher (run this on the professor's machine)
+# Project: Explaining Network Incidents in SDN Through Log Analysis Using Mistral 7B
+# Team: Eris Mustafa, Shrikant Nimkar - Security of SDN, Universite du Luxembourg
+#
+# Usage:
+#   ./group11 check          verify the environment (docker, kernel, Ollama)
+#   ./group11 experiment     full pipeline end to end: testbed -> 30-run
+#                            campaign -> audit -> baseline -> Mistral -> evaluate
+#   ./group11 analysis       replay the recorded 30-run evidence through the
+#                            analysis pipeline (no testbed campaigns needed)
+#   ./group11 setup-ollama   install + configure Ollama and pull mistral
+#   ./group11 up | down      start/stop the testbed
+#   ./group11 shell          shell inside the lab container
+#   ./group11 logs [svc]     follow container logs
+#
+# Modes are resumable: families/calls already completed are skipped, so an
+# interrupted run continues where it stopped when you re-run the command.
+#
+# Requirements: Linux with Docker Engine + compose v2. A standard distro
+# kernel (Ubuntu/Debian) already ships the Open vSwitch datapath module;
+# no custom kernel is needed on native Linux. Ollama is provisioned
+# automatically by `setup-ollama` (also invoked automatically when missing).
+# To prevent the automatic Ollama installation, export SKIP_OLLAMA_AUTO=1.
+# =============================================================================
+set -Eeuo pipefail
+
+PKG="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJ="$PKG/project"
+ONOS_AUTH="onos:rocks"
+ONOS_BASE="http://10.0.0.10:8181/onos/v1"
+OLLM="http://host.docker.internal:11434"
+LABDIR="cd /home/mininet/group11_sdn_mistral_project &&"
+NEED_SUDO=0
+
+say() { printf '\n\033[1;36m==> %s\033[0m\n' "$*"; }
+ok()  { printf '\033[1;32m OK: %s\033[0m\n' "$*"; }
+die() { printf '\n\033[1;31mFATAL: %s\033[0m\n' "$*" >&2; exit 1; }
+usage() { grep '^#' "$0" | sed 's/^# \{0,1\}//' | sed -n '2,40p'; exit 1; }
+
+docker_bin() {   # prefer docker group, fall back to sudo
+  if docker info >/dev/null 2>&1; then NEED_SUDO=0
+  elif sudo -n docker info >/dev/null 2>&1; then NEED_SUDO=1
+  elif sudo docker info >/dev/null 2>&1; then NEED_SUDO=1
+  else die "Docker is not available. Install Docker Engine: https://docs.docker.com/engine/install/"
+  fi
+}
+dc() {  # docker compose, always against this package's compose file
+  if [ "$NEED_SUDO" -eq 1 ]; then sudo docker compose -f "$PKG/docker-compose.yml" "$@"
+  else docker compose -f "$PKG/docker-compose.yml" "$@"; fi
+}
+
+need_project() {
+  [ -f "$PROJ/run_experiment.py" ] && [ -f "$PROJ/mistral_explain.py" ] \
+    || die "project scripts not found in $PROJ
+Copy the group11 project package (v4) into the 'project' folder of this package,
+then re-run. See README.md, section 'Before the first run'."
+}
+
+host_datapath_check() {
+  if modinfo openvswitch >/dev/null 2>&1 || grep -qs openvswitch "/lib/modules/$(uname -r)/modules.builtin"; then
+    sudo modprobe openvswitch 2>/dev/null || true
+    ok "host kernel provides the Open vSwitch datapath"
+  else
+    die "the host kernel has no Open vSwitch datapath.
+On Ubuntu/Debian:  sudo apt-get install -y linux-modules-extra-\$(uname -r) openvswitch-switch
+and re-run. (Only stock WSL2 kernels lack OVS entirely; see README.md note on WSL2.)"
+  fi
+}
+
+wait_onos() {
+  local i
+  say "waiting for ONOS REST at $ONOS_BASE ..."
+  for i in $(seq 1 60); do
+    if curl -sS -m 10 -u "$ONOS_AUTH" "$ONOS_BASE/devices" >/dev/null 2>&1; then return 0; fi
+    sleep 5
+  done
+  die "ONOS REST API did not come up within 5 minutes"
+}
+
+activate_onos() {
+  local app
+  for app in openflow-base openflow fwd; do
+    curl -sS -m 10 -u "$ONOS_AUTH" -X POST \
+      "$ONOS_BASE/applications/org.onosproject.$app/active" >/dev/null
+  done
+  sleep 5
+  curl -sS -m 10 -u "$ONOS_AUTH" "$ONOS_BASE/applications" | python3 -c '
+import sys, json
+apps = {a["name"]: a["state"] for a in json.load(sys.stdin)["applications"]}
+missing = [a for a in ("openflow-base", "openflow", "fwd")
+           if apps.get("org.onosproject." + a) != "ACTIVE"]
+sys.exit(1 if missing else 0)
+' || die "ONOS applications did not reach ACTIVE state"
+  ok "ONOS apps active (openflow-base, openflow, fwd)"
+}
+
+restart_onos() {   # required before every family and every switch_failure run
+  dc restart onos >/dev/null
+  wait_onos
+  activate_onos
+}
+
+family_complete() {  # all 6 runs of scenario $1 have ground truth
+  local f="$PROJ/runs/$1" i
+  for i in 1 2 3 4 5 6; do
+    [ -f "$f/$(printf 'r%02d' "$i")/ground_truth.json" ] || return 1
+  done
+  return 0
+}
+
+family() {  # family <scenario>
+  local scenario="$1"
+  if family_complete "$scenario"; then
+    say "family $scenario already complete (6/6), skipping"
+    return 0
+  fi
+  say "family $scenario: 6 runs"
+  dc exec -u root sdn-lab bash -c \
+    "$LABDIR mn -c && python3 -u run_experiment.py --scenario $scenario --runs 6"
+}
+
+# ---------------------------------------------------------------- Ollama ----
+ollama_install() {
+  say "installing Ollama on this machine (official installer script)"
+  command -v ollama >/dev/null 2>&1 || curl -fsSL https://ollama.com/install.sh | sh
+  [ "$(command -v ollama >/dev/null 2>&1 && echo yes)" = yes ] \
+    || die "Ollama installation failed; install manually: https://ollama.com/download"
+  # make it listen on all interfaces so the lab container can reach it
+  if systemctl cat ollama.service >/dev/null 2>&1; then
+    sudo mkdir -p /etc/systemd/system/ollama.service.d
+    if [ ! -f /etc/systemd/system/ollama.service.d/override.conf ] \
+       || ! grep -q 'OLLAMA_HOST=0.0.0.0' /etc/systemd/system/ollama.service.d/override.conf; then
+      printf '[Service]\nEnvironment="OLLAMA_HOST=0.0.0.0"\n' \
+        | sudo tee /etc/systemd/system/ollama.service.d/override.conf >/dev/null
+    fi
+    sudo systemctl daemon-reload
+    sudo systemctl restart ollama
+  else
+    pkill -x ollama 2>/dev/null || true
+    OLLAMA_HOST=0.0.0.0 nohup ollama serve > /tmp/ollama-serve.log 2>&1 &
+  fi
+  say "pulling the mistral model (about 4.4 GB)"
+  ollama pull mistral
+}
+
+setup-ollama() {
+  case "$(uname -s)" in
+    Linux) : ;;
+    *) die "this command provisions Linux only. On other systems install Ollama
+from https://ollama.com/download, set OLLAMA_HOST=0.0.0.0, then: ollama pull mistral" ;;
+  esac
+  ollama_install
+  if curl -sS -m 10 http://localhost:11434/api/tags 2>/dev/null | grep -q mistral; then
+    ok "Ollama up and mistral present"
+  else
+    die "Ollama is installed but its API is not answering on localhost:11434"
+  fi
+  if ss -tln 2>/dev/null | grep -qE '0\.0\.0\.0:11434|\[::\]:11434'; then
+    ok "Ollama listens on all interfaces (containers can reach it)"
+  else
+    echo "   NOTE: Ollama does not appear bound to 0.0.0.0:11434; the lab container
+   may not reach it. Set OLLAMA_HOST=0.0.0.0 and restart Ollama (README.md)."
+  fi
+}
+
+ollama_reachable_from_lab() {   # container->host.docker.internal connectivity
+  local out=""
+  out="$(dc exec -T -u root sdn-lab bash -c \
+    "python3 -c \"import urllib.request,json; \
+     d=json.load(urllib.request.urlopen('$OLLM/api/tags', timeout=10)); \
+     print([m['name'] for m in d['models']])\"" 2>/dev/null || true)"
+  [ -n "$out" ] || return 1
+  echo "$out" | grep -q mistral
+}
+
+ensure_ollama() {   # guarantee Ollama + mistral are installed and configured
+  if ollama_reachable_from_lab; then
+    ok "Ollama reachable from the lab container, mistral model present"
+    return 0
+  fi
+  if [ "${SKIP_OLLAMA_AUTO:-0}" = 1 ]; then
+    die "Ollama (with the mistral model) is required for the Mistral stage.
+Run: ./group11 setup-ollama   (or export SKIP_OLLAMA_AUTO= unset to auto-install)"
+  fi
+  case "$(uname -s)" in
+    Linux)
+      say "Ollama not usable from the lab container; installing/configuring it now"
+      ollama_install
+      ;;
+    *)
+      die "install Ollama for your OS (https://ollama.com/download), set
+OLLAMA_HOST=0.0.0.0, pull mistral, then re-run."
+      ;;
+  esac
+  ollama_reachable_from_lab \
+    || die "Ollama is installed but still unreachable from the lab container.
+Set OLLAMA_HOST=0.0.0.0 (README.md, section Ollama) and check the firewall."
+  ok "Ollama provisioned and reachable"
+}
+
+# ------------------------------------------------------------- pipeline -----
+campaign() {
+  say "running the 30-run campaign (ONOS restart before every family, and before every switch_failure run)"
+  restart_onos; family normal
+  restart_onos; family link_failure
+
+  say "family switch_failure: 6 runs, ONOS restart before EVERY run"
+  for i in 1 2 3 4 5 6; do
+    if [ -f "$PROJ/runs/switch_failure_r0$i/ground_truth.json" ]; then
+      echo "switch_failure_r0$i present, skipping"
+      continue
+    fi
+    echo "===== ONOS restart for switch_failure_r0$i ====="
+    restart_onos
+    dc exec -u root sdn-lab bash -c \
+      "$LABDIR mn -c && python3 run_experiment.py --scenario switch_failure --start-run $i --runs 1"
+    dc exec -T -e RUNI="$i" -u root sdn-lab bash -c \
+      "$LABDIR exec python3 -" <<'G11PY'
+import json, os
+i = os.environ["RUNI"]
+s = json.load(open(f"runs/switch_failure_r0{i}/raw/rest_baseline.json"))["state"]
+print(f"r0{i} baseline: links={len(s['links']['links'])} hosts={len(s['hosts']['hosts'])}")
+G11PY
+  done
+
+  restart_onos; family congestion
+  restart_onos; family host_disconnection
+}
+
+audit() {   # acceptance audit of all 30 runs (in the lab container python)
+  say "acceptance audit of all 30 runs"
+  dc exec -T -u root sdn-lab bash -c "$LABDIR exec python3 -" <<'G11PY' \
+    || die "audit found problem runs (see output above)"
+import json, glob
+bad = 0
+for d in sorted(glob.glob("runs/*_r*")):
+    run = d.split("/")[-1]
+    try:
+        p = json.load(open(f"{d}/raw/probes.json"))
+        base = [e["loss_pct"] for e in p if e.get("label")=="baseline" and e.get("dst")]
+        s = json.load(open(f"{d}/raw/rest_baseline.json"))["state"]
+        nl = len((s.get("links") or {}).get("links", []))
+        nh = len((s.get("hosts") or {}).get("hosts", []))
+    except Exception as e:
+        print(f"{run}: INCOMPLETE ({e})"); bad += 1; continue
+    ok = base and all(x==0 for x in base) and nl==8
+    if not ok:
+        bad += 1
+    print(f"{run:26s} baseline_loss={base} links={nl} hosts={nh} -> {'OK' if ok else 'WEDGED'}")
+print("\nALL 30 RUNS VALID" if bad==0 else f"\n{bad} problem runs")
+exit(0 if bad==0 else 1)
+G11PY
+  ok "ALL 30 RUNS VALID"
+}
+
+matrix() {
+  say "regenerating the experiment matrix"
+  dc exec -T -u root sdn-lab bash -c "$LABDIR exec python3 -" <<'G11PY' \
+    || die "matrix regeneration failed"
+import json, glob
+m = [json.load(open(f)) for f in sorted(glob.glob("runs/*_r*/ground_truth.json"))]
+json.dump(m, open("runs/experiment_matrix.json", "w"), indent=2)
+print(len(m), "runs in matrix")
+exit(0 if len(m)==30 else 1)
+G11PY
+}
+
+preprocess() {
+  say "preprocessing evidence into incident records"
+  dc exec -u root sdn-lab bash -c "$LABDIR python3 preprocess_logs.py 2>&1 | tail -6"
+  local n
+  n=$(ls "$PROJ"/runs/*/incident_record.json 2>/dev/null | wc -l || true)
+  [ "$n" -eq 30 ] || die "expected 30 incident_record.json files, found $n"
+  ok "30 incident records"
+}
+
+baseline() {
+  say "rule-based baseline (baseline_explain.py)"
+  dc exec -u root sdn-lab bash -c "$LABDIR python3 baseline_explain.py 2>&1 | head -30"
+}
+
+mistral() {
+  local raw str
+  raw=$(ls "$PROJ"/runs/*/explanations/mistral_raw.json 2>/dev/null | wc -l || true)
+  str=$(ls "$PROJ"/runs/*/explanations/mistral_structured.json 2>/dev/null | wc -l || true)
+  if [ "$raw" -eq 30 ] && [ "$str" -eq 30 ]; then
+    say "Mistral stage already complete (60/60 calls), skipping"
+    return 0
+  fi
+  ensure_ollama
+  say "running the Mistral stage (60 calls = 30 runs x 2 conditions; several hours on CPU)"
+  dc exec -d -u root sdn-lab bash -c \
+    "$LABDIR OLLAMA_URL=$OLLM nohup python3 -u mistral_explain.py > mistral_stage.log 2>&1"
+  ok "stage launched detached; progress is echoed here as calls complete"
+
+  sleep 20
+  local prev=0 stalled=0 elapsed=0 cur max_wait=43200   # 12 h hard cap
+  while :; do
+    raw=$(ls "$PROJ"/runs/*/explanations/mistral_raw.json 2>/dev/null | wc -l || true)
+    str=$(ls "$PROJ"/runs/*/explanations/mistral_structured.json 2>/dev/null | wc -l || true)
+    if [ "$raw" -eq 30 ] && [ "$str" -eq 30 ]; then
+      ok "all 60 explanation files present"
+      break
+    fi
+    cur=0
+    if [ -f "$PROJ/mistral_stage.log" ]; then cur=$(wc -l < "$PROJ/mistral_stage.log"); fi
+    if [ "$cur" -gt "$prev" ]; then
+      sed -n "$((prev + 1)),${cur}p" "$PROJ/mistral_stage.log"
+      prev="$cur"; stalled=0
+    else
+      stalled=$((stalled + 1))
+    fi
+    if [ "$stalled" -ge 45 ]; then
+      die "no progress for ~45 min with only $raw/30 raw and $str/30 structured files. Last log lines:
+$(tail -5 "$PROJ/mistral_stage.log" 2>/dev/null || true)"
+    fi
+    sleep 60; elapsed=$((elapsed + 60))
+    if [ "$elapsed" -ge "$max_wait" ]; then die "Mistral stage exceeded 12 h"; fi
+  done
+}
+
+evaluate() {
+  say "evaluation (baseline vs mistral_raw vs mistral_structured)"
+  dc exec -u root sdn-lab bash -c "$LABDIR python3 evaluate.py 2>&1 | tail -20"
+  ok "per-run metrics written to project/runs/evaluation_summary.csv"
+}
+
+summary() {
+  say "PIPELINE COMPLETE"
+  cat <<'G11TXT'
+
+Results are in project/runs/evaluation_summary.csv (per-run metrics + averages).
+Reference results from the project report for comparison:
+  identification accuracy:  baseline (rules) 26/30 (86.7%)
+                             mistral_raw       25/30 (83.3%)
+                             mistral_structured 24/30 (80.0%)
+  avg runtime:               baseline < 1 ms | raw 242 s | structured 453 s
+
+Remaining manual step (joint human rubric, cannot be automated):
+  1) open project/runs/rubric_human_template.csv (90 rows)
+  2) fill usefulness_1_5, clarity_1_5, confirm unsupported_assertions
+  3) re-run the last stage to merge the human columns:
+     ./group11 shell   then:  python3 evaluate.py   (or: ./group11 experiment )
+G11TXT
+}
+
+# ---------------------------------------------------------------- modes -----
+mode_experiment() {
+  say "mode: EXPERIMENT (full end-to-end pipeline)"
+  need_project; docker_bin; host_datapath_check
+  say "building/starting the testbed (first build takes a few minutes)"
+  dc up -d --build
+  wait_onos
+  activate_onos
+  ensure_ollama
+  campaign
+  audit
+  matrix
+  preprocess
+  baseline
+  mistral
+  evaluate
+  summary
+}
+
+mode_analysis() {
+  say "mode: ANALYSIS (replay the recorded 30-run evidence)"
+  need_project; docker_bin
+  local n
+  n=$(ls -d "$PROJ"/runs/*_r* 2>/dev/null | wc -l || true)
+  [ "$n" -ge 30 ] || die "expected 30 run directories in project/runs, found $n.
+For analysis mode, copy the recorded 30-run evidence (the runs/ directory of
+the completed project) into project/runs/ first. See README.md."
+  say "starting the lab container (ONOS not needed for analysis)"
+  dc up -d --build --no-deps sdn-lab
+  preprocess
+  baseline
+  mistral
+  evaluate
+  summary
+}
+
+mode_check() {
+  say "environment check"
+  docker_bin && ok "docker $(docker --version | cut -d, -f1) usable (sudo: $NEED_SUDO)"
+  dc version >/dev/null 2>&1 && ok "docker compose v2 available" || die "docker compose v2 required"
+  [ -f "$PKG/Dockerfile" ] && ok "package files present"
+  if [ -f "$PROJ/run_experiment.py" ]; then ok "project scripts present"
+  else echo "   NOTE: project scripts not in ./project yet (see README.md)"; fi
+  if command -v python3 >/dev/null; then ok "host python3 present"; 
+  else echo "   NOTE: host python3 not found (only needed for ONOS activation checks)"; fi
+  host_datapath_check
+  if dc ps 2>/dev/null | grep -q sdn-lab; then
+    if ollama_reachable_from_lab; then ok "Ollama reachable from lab, mistral present"
+    else echo "   NOTE: Ollama not reachable/mistral missing -> ./group11 setup-ollama"; fi
+  else
+    echo "   NOTE: testbed not running; start with ./group11 up (Ollama is checked at the Mistral stage)"
+  fi
+  say "check finished"
+}
+
+mode_up()    { need_project; docker_bin; host_datapath_check; dc up -d --build; wait_onos; activate_onos; ok "testbed up (ONOS GUI: http://localhost:8181)" ; }
+mode_down()  { docker_bin; dc down; ok "testbed stopped"; }
+mode_shell() { docker_bin; dc exec -u root sdn-lab bash || die "lab container not running (./group11 up)"; }
+mode_logs()  { docker_bin; dc logs -f --tail 50 "${1:-sdn-lab}"; }
+
+case "${1:-}" in
+  experiment)      mode_experiment ;;
+  analysis)        mode_analysis ;;
+  check)           mode_check ;;
+  setup-ollama)    setup-ollama ;;
+  up)              mode_up ;;
+  down)            mode_down ;;
+  shell)           mode_shell ;;
+  logs)            shift; mode_logs "$@" ;;
+  *)               usage ;;
+esac
