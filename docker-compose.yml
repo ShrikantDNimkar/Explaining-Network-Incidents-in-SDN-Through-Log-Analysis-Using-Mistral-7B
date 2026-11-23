@@ -11,6 +11,9 @@ name: group11
 services:
   onos:
     image: onosproject/onos:latest
+    # upstream publishes no arm64 image: pin amd64 so Apple Silicon runs it
+    # under Rosetta emulation (Docker Desktop) instead of failing to pull
+    platform: linux/amd64
     container_name: onos
     networks:
       sdn-net:

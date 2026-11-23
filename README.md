@@ -62,6 +62,42 @@ Convenience commands:
 | `experiment` | build images, start ONOS + lab, activate `openflow-base`/`openflow`/`fwd`, run the 30-run campaign (ONOS restart before every family and before every switch_failure run, per the project protocol), audit all 30 runs against acceptance criteria, regenerate the experiment matrix, preprocess evidence, rule baseline, Mistral stage (60 calls), evaluate. |
 | `analysis` | start the lab container only, preprocess the recorded evidence, rule baseline, Mistral stage (60 calls), evaluate. |
 
+## Running on macOS
+
+macOS is supported through **Docker Desktop 4.27 or newer**: since 4.27 the
+Linux VM that runs containers has the Open vSwitch datapath **built into its
+kernel**, so Mac users need no custom kernel and no extra VM, same as on
+Ubuntu/Debian/Kali.
+
+One-time Mac preparation:
+
+1. Install a current Docker Desktop. In Settings > Resources give the VM at
+   least 8 GB of memory. On Apple silicon keep Settings > General >
+   "Use Rosetta for x86_64/amd64 emulation" enabled (it is the default).
+2. The upstream ONOS image has no arm64 build. docker-compose.yml pins
+   `platform: linux/amd64`, so on Apple silicon the controller runs under
+   Rosetta and warms up noticeably slower (up to about 3 minutes); the
+   launcher's activation retry covers it. If you ever see "ONOS applications
+   did not reach ACTIVE state" on a Mac, simply re-run `./group11 up`.
+3. Install the native Mac Ollama app (https://ollama.com/download or
+   `brew install --cask ollama`), quit it, run
+   `launchctl setenv OLLAMA_HOST 0.0.0.0`, start it again, then
+   `ollama pull mistral`. On Apple silicon Ollama uses Metal, so the Mistral
+   stage is faster than on an x86 CPU laptop.
+4. macOS ships without `python3` until the Command Line Tools are present:
+   if a dialog offers them, accept it, or run `xcode-select --install` once.
+5. If macOS asks whether to allow incoming connections for Ollama on port
+   11434, click Allow.
+
+Everything else is identical: `./group11 check`, then `./group11 experiment`
+(or `./group11 analysis` to replay the recorded evidence without re-running
+the campaign). The launcher detects macOS automatically (controller reached
+via the published port, datapath probed inside the Docker VM).
+
+End-to-end verified on Debian-based Linux (Kali rolling, Ubuntu 22.04 VM).
+The macOS path follows Docker Desktop's documented kernel support and the
+same container images; if anything misbehaves on a Mac, open an issue.
+
 ## Results
 
 All outputs land in `project/runs/`:

@@ -29,7 +29,15 @@ set -Eeuo pipefail
 PKG="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJ="$PKG/project"
 ONOS_AUTH="onos:rocks"
-ONOS_BASE="http://10.0.0.10:8181/onos/v1"
+# Linux hosts can route to the bridge IP; macOS cannot, so use the published
+# port there. Override for exotic setups:   ONOS_BASE=... ./group11 <mode>
+if [ -z "${ONOS_BASE:-}" ]; then
+  if [ "$(uname -s)" = "Darwin" ]; then
+    ONOS_BASE="http://localhost:8181/onos/v1"
+  else
+    ONOS_BASE="http://10.0.0.10:8181/onos/v1"
+  fi
+fi
 OLLM="http://host.docker.internal:11434"
 LABDIR="cd /home/mininet/group11_sdn_mistral_project &&"
 NEED_SUDO=0
@@ -59,6 +67,17 @@ then re-run. See README.md, section 'Before the first run'."
 }
 
 host_datapath_check() {
+  if [ "$(uname -s)" = "Darwin" ]; then
+    # on macOS the kernel that matters is the Docker Desktop VM's, not macOS:
+    # since Docker Desktop 4.27 it ships Open vSwitch built in.
+    if docker run --rm --privileged ubuntu:20.04 sh -c 'ls -d /sys/module/openvswitch >/dev/null 2>&1' 2>/dev/null; then
+      ok "Docker Desktop VM kernel provides the Open vSwitch datapath (built in)"
+    else
+      die "the Docker Desktop VM kernel has no Open vSwitch datapath.
+Docker Desktop 4.27+ ships it built in. Please update Docker Desktop and re-run."
+    fi
+    return 0
+  fi
   if modinfo openvswitch >/dev/null 2>&1 || grep -qs openvswitch "/lib/modules/$(uname -r)/modules.builtin"; then
     sudo modprobe openvswitch 2>/dev/null || true
     ok "host kernel provides the Open vSwitch datapath"
@@ -156,6 +175,11 @@ ollama_install() {
 setup-ollama() {
   case "$(uname -s)" in
     Linux) : ;;
+    Darwin)
+      die "on macOS install the native Ollama app first, then make it reachable:
+  1. install from https://ollama.com/download (or: brew install --cask ollama)
+  2. quit the Ollama menu-bar app, then run:  launchctl setenv OLLAMA_HOST 0.0.0.0
+  3. start the Ollama app again, and finally:  ollama pull mistral" ;;
     *) die "this command provisions Linux only. On other systems install Ollama
 from https://ollama.com/download, set OLLAMA_HOST=0.0.0.0, then: ollama pull mistral" ;;
   esac
