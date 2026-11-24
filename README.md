@@ -64,10 +64,14 @@ Convenience commands:
 
 ## Running on macOS
 
-macOS is supported through **Docker Desktop 4.27 or newer**: since 4.27 the
-Linux VM that runs containers has the Open vSwitch datapath **built into its
-kernel**, so Mac users need no custom kernel and no extra VM, same as on
-Ubuntu/Debian/Kali.
+macOS is supported through Docker Desktop. Versions from 4.27 through the 4.x
+line had the Open vSwitch datapath **built into the VM kernel**, so no custom
+kernel and no extra VM were needed. **Current Docker Desktop versions
+(verified on 29.x) no longer ship that kernel module**, which means
+`./group11 experiment` (live Mininet topology) cannot run on such a Mac: the
+launcher detects it, prints a NOTE, and `experiment` exits early with
+guidance. `./group11 up`, `check`, and `analysis` work on every version, and
+`analysis` (the full Mistral replay) is the intended Mac workflow.
 
 One-time Mac preparation:
 
@@ -89,14 +93,38 @@ One-time Mac preparation:
 5. If macOS asks whether to allow incoming connections for Ollama on port
    11434, click Allow.
 
-Everything else is identical: `./group11 check`, then `./group11 experiment`
-(or `./group11 analysis` to replay the recorded evidence without re-running
-the campaign). The launcher detects macOS automatically (controller reached
+Everything else is identical: `./group11 check`, `./group11 up` (ONOS GUI at
+http://localhost:8181), or `./group11 analysis` to replay the recorded
+evidence without re-running the campaign. On Docker Desktop versions without
+the Open vSwitch module, run the campaign on your Linux host and replay it
+on the Mac. The launcher detects macOS automatically (controller reached
 via the published port, datapath probed inside the Docker VM).
 
-End-to-end verified on Debian-based Linux (Kali rolling, Ubuntu 22.04 VM).
-The macOS path follows Docker Desktop's documented kernel support and the
-same container images; if anything misbehaves on a Mac, open an issue.
+End-to-end verified on Debian-based Linux (Kali rolling, Ubuntu 22.04 VM);
+the analysis replay is verified on Apple silicon (M1 Pro, Docker Desktop
+with Rosetta emulation, Ollama on Apple Metal). If anything misbehaves on
+your platform, open an issue.
+
+## Reproduction notes
+
+Reference results were produced on the original host (Windows/WSL2, custom
+kernel). The campaign has since been repeated end to end on a second Linux
+host (Kali rolling), and the analysis stage was replayed from scratch on
+Apple silicon (M1 Pro, MacBook Pro 16, Docker Desktop + native Ollama on
+Apple Metal, 60 fresh Mistral 7B calls):
+
+- `mistral_raw`: 25/30 identification accuracy, identical to the report; all
+  30 raw classifications matched the recorded run.
+- `mistral_structured`: 23/30 vs 24/30 in the report. The single differing
+  run (normal_r01) committed to `congestion` on a no-incident run where the
+  recorded run correctly abstained (`insufficient_evidence`); both cited the
+  same observed events, so the divergence is sampling-level, not input drift.
+- Runtime: about 24 s per raw call and 31 s per structured call on Metal,
+  roughly 10-15x faster than the CPU reference (242 s / 453 s).
+- The baseline is deterministic and reproduced exactly (26/30, 86.7%).
+
+Fresh Apple silicon outputs live in `runs/<run>/explanations/`; the recorded
+report originals are preserved per run in `runs/<run>/explanations_report/`.
 
 ## Results
 
