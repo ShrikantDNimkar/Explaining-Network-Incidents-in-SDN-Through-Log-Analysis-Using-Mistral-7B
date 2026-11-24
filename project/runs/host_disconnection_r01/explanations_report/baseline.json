@@ -1,0 +1,13 @@
+{
+  "condition": "baseline",
+  "elapsed_ms": 0,
+  "explanation": {
+    "category": "no_incident_detected",
+    "network_impact": "No fault indicators found in the record.",
+    "likely_cause": "No recognisable incident pattern; evidence may be insufficient for a stronger statement.",
+    "evidence": [],
+    "operator_checks": [
+      "None required for the observed evidence"
+    ]
+  }
+}

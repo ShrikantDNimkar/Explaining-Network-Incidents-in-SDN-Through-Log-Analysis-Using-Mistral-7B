@@ -1,0 +1,16 @@
+{
+  "condition": "baseline",
+  "elapsed_ms": 0,
+  "explanation": {
+    "category": "congestion",
+    "network_impact": "Traffic is degraded but not interrupted.",
+    "likely_cause": "Competing traffic on a constrained link (delay/loss/throughput degradation).",
+    "evidence": [
+      "RTT increased from ~1 ms to ~152 ms"
+    ],
+    "operator_checks": [
+      "Inspect switch port counters for the busy link",
+      "Repeat iperf3 to confirm sustained degradation"
+    ]
+  }
+}

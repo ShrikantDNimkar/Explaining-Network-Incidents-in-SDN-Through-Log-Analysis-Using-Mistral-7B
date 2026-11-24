@@ -1,0 +1,16 @@
+{
+  "condition": "baseline",
+  "elapsed_ms": 0,
+  "explanation": {
+    "category": "switch_failure",
+    "network_impact": "The controller lost the OpenFlow device of:0000000000000003; traffic needing that switch is interrupted.",
+    "likely_cause": "Switch stopped or lost its control channel (device unavailable in phase post_inject_10s).",
+    "evidence": [
+      "ONOS device of:0000000000000003 available=false"
+    ],
+    "operator_checks": [
+      "Check the switch process/service on the Mininet host",
+      "Look for control-channel errors in the Karaf log"
+    ]
+  }
+}
