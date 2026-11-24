@@ -179,6 +179,7 @@ Reference results from the project report:
 ```
 QUICKSTART.md         fast path: reproduce the project in three commands
 ARCHITECTURE.md       how the pieces fit together (topology, pipeline, rubric)
+LICENSE              MIT License (Eris Mustafa & Shrikant Nimkar)
 README.md            this file
 docs/media/           screenshots + demo video (see docs/media/CAPTURING.md)
 Dockerfile           lab image: ubuntu:20.04, Mininet 2.3.0, OVS, docker CLI, iperf, sshd:2222
