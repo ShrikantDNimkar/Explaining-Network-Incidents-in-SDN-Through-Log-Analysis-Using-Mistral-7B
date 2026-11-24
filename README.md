@@ -131,6 +131,27 @@ Apple Metal, 60 fresh Mistral 7B calls):
 Fresh Apple silicon outputs live in `runs/<run>/explanations/`; the recorded
 report originals are preserved per run in `runs/<run>/explanations_report/`.
 
+## Screenshots and demo video
+
+Visual material lives in [`docs/media/`](docs/media), with
+[docs/media/CAPTURING.md](docs/media/CAPTURING.md) documenting exactly what
+each shot shows, how it was captured, and the naming scheme. Once the files
+below exist in `docs/media/`, remove the surrounding HTML comment to render
+them here.
+
+<!-- Screenshots and demo video: uncomment each line as its file lands in docs/media/
+![ONOS GUI with the ring topology](docs/media/onos-gui-topology.png)
+![Campaign progress](docs/media/campaign-progress.png)
+![Analysis pipeline complete](docs/media/analysis-complete.png)
+![Evaluation summary](docs/media/evaluation-summary.png)
+![Launcher usage](docs/media/group11-usage.png)
+Demo video: [group11-demo.mp4](docs/media/group11-demo.mp4)
+-->
+
+Planned demo video (60-90 s): `check` -> `up` -> ONOS GUI -> campaign ->
+Mistral calls -> final evaluation; the capture script is in
+[docs/media/CAPTURING.md](docs/media/CAPTURING.md).
+
 ## Results
 
 All outputs land in `project/runs/`:
@@ -159,6 +180,7 @@ Reference results from the project report:
 QUICKSTART.md         fast path: reproduce the project in three commands
 ARCHITECTURE.md       how the pieces fit together (topology, pipeline, rubric)
 README.md            this file
+docs/media/           screenshots + demo video (see docs/media/CAPTURING.md)
 Dockerfile           lab image: ubuntu:20.04, Mininet 2.3.0, OVS, docker CLI, iperf, sshd:2222
 entrypoint.sh        lab container entrypoint (module load, OVS start, sshd)
 docker-compose.yml   ONOS (10.0.0.10) + privileged sdn-lab (10.0.0.20) on sdn-net
