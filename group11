@@ -73,8 +73,12 @@ host_datapath_check() {
     if docker run --rm --privileged ubuntu:20.04 sh -c 'ls -d /sys/module/openvswitch >/dev/null 2>&1' 2>/dev/null; then
       ok "Docker Desktop VM kernel provides the Open vSwitch datapath (built in)"
     else
-      die "the Docker Desktop VM kernel has no Open vSwitch datapath.
-Docker Desktop 4.27+ ships it built in. Please update Docker Desktop and re-run."
+      # Docker Desktop 29.x linuxkit kernels no longer ship the builtin module.
+      # Not fatal here: only the live Mininet topology (experiment mode) needs it.
+      G11_DATAPATH_MISSING=1
+      echo "   NOTE: this Docker Desktop VM kernel has no Open vSwitch datapath
+   (Docker Desktop 29.x+ no longer ships it). ONOS and analysis mode work
+   without it; experiment mode (live Mininet topology) will exit early."
     fi
     return 0
   fi
@@ -382,6 +386,10 @@ G11TXT
 mode_experiment() {
   say "mode: EXPERIMENT (full end-to-end pipeline)"
   need_project; docker_bin; host_datapath_check
+  [ -z "${G11_DATAPATH_MISSING:-}" ] || die "experiment mode needs the Open vSwitch
+kernel datapath for the live Mininet topology, but this Docker Desktop VM kernel
+does not provide it. Run the campaign on your Linux host, copy its project/runs
+evidence here, and use './group11 analysis' on this Mac."
   say "building/starting the testbed (first build takes a few minutes)"
   dc up -d --build
   wait_onos
