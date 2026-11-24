@@ -6,11 +6,19 @@ Complete, reproducible project package: a controlled SDN testbed, labelled
 incident generation, log preprocessing, a local Mistral 7B explanation
 prototype, a rule-based baseline, and a three-condition evaluation.
 
+> The recommended way to run everything in this folder is the Docker package
+> at the **repository root**: `./group11` orchestrates build, testbed,
+> campaign, analysis, and evaluation on any supported machine. See
+> [QUICKSTART.md](../QUICKSTART.md), [ARCHITECTURE.md](../ARCHITECTURE.md),
+> and [README.md](../README.md) there. The Docker files themselves live at the
+> repository root as `Dockerfile`, `docker-compose.yml`, `entrypoint.sh`.
+> The instructions below are for per-script or VM usage.
+
 ## Two ways to deploy
 
 | Option | Where | See |
 | --- | --- | --- |
-| A. **Local PC / macOS with Docker Desktop (recommended)** | ONOS + Mininet lab in containers, Ollama + Mistral 7B natively on the host; SSH access via PuTTY (port 2222) | `LOCAL_SETUP.md`, `Dockerfile`, `docker-compose.yml` |
+| A. **Local PC / macOS with Docker Desktop (recommended)** | ONOS + Mininet lab in containers (repository root), Ollama + Mistral 7B natively on the host; SSH access on port 2222 | `../QUICKSTART.md`, `../README.md`, `../Dockerfile`, `../docker-compose.yml`, `../group11` |
 | B. Course Mininet VM (Labs 1-3 style) | Everything inside the VM; works only if the VM has >= 4-5 GB RAM | steps below |
 
 The course VM as configured (1 vCPU, 1 GB RAM, ~2 GB free disk) cannot run
@@ -27,8 +35,8 @@ ONOS plus Mistral 7B; use option A unless you can enlarge the VM.
 | `baseline_explain.py` | Rule-based baseline explanations. |
 | `mistral_explain.py` | Mistral 7B via Ollama, fixed prompt, raw vs structured conditions. |
 | `evaluate.py` | Rubric metrics, per-run and condition-level comparison, human rubric template. |
-| `Dockerfile` / `entrypoint.sh` / `docker-compose.yml` | Option A testbed (ONOS + privileged Mininet lab with SSH). |
-| `LOCAL_SETUP.md` | Full option A guide: Windows/macOS, PuTTY, Ollama on host. |
+| `../Dockerfile` / `../entrypoint.sh` / `../docker-compose.yml` / `../group11` | Option A testbed at the repository root: ONOS + privileged Mininet lab with SSH, one-command launcher. |
+| `../QUICKSTART.md` / `../README.md` | Full option A guide: Linux, macOS, Ollama on host, troubleshooting. |
 
 ## Option B: course Mininet VM (only with enough RAM)
 

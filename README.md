@@ -11,6 +11,11 @@ congestion, host disconnection, plus normal controls), and an analysis pipeline
 that explains each incident three ways: a rule-based baseline and Mistral 7B on
 raw and on structured evidence.
 
+**New here?** [QUICKSTART.md](QUICKSTART.md) is the fast path from a clean
+machine to reproduced results in three commands, and [ARCHITECTURE.md](ARCHITECTURE.md)
+explains how the testbed, the campaign, the evidence pipeline, and the
+evaluation rubric fit together. This README is the full reference.
+
 ## One-time preparation
 
 1. Requirements: a Linux machine with **Docker Engine + Compose v2** and
@@ -151,6 +156,8 @@ Reference results from the project report:
 ## Package contents
 
 ```
+QUICKSTART.md         fast path: reproduce the project in three commands
+ARCHITECTURE.md       how the pieces fit together (topology, pipeline, rubric)
 README.md            this file
 Dockerfile           lab image: ubuntu:20.04, Mininet 2.3.0, OVS, docker CLI, iperf, sshd:2222
 entrypoint.sh        lab container entrypoint (module load, OVS start, sshd)
