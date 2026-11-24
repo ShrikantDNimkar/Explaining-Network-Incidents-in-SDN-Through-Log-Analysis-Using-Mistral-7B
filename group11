@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 # =============================================================================
-# Group 11 - one-command launcher (run this on the professor's machine)
+# Group 11 - one-command launcher for the whole project
 # Project: Explaining Network Incidents in SDN Through Log Analysis Using Mistral 7B
 # Team: Eris Mustafa, Shrikant Nimkar - Security of SDN, Universite du Luxembourg
+#
+# New here? QUICKSTART.md is the fast path, ARCHITECTURE.md explains how the
+# pieces fit together, README.md is the full reference.
 #
 # Usage:
 #   ./group11 check          verify the environment (docker, kernel, Ollama)
@@ -18,7 +21,8 @@
 # Modes are resumable: families/calls already completed are skipped, so an
 # interrupted run continues where it stopped when you re-run the command.
 #
-# Requirements: Linux with Docker Engine + compose v2. A standard distro
+# Requirements: Linux with Docker Engine + compose v2, or macOS with Docker
+# Desktop (up/check/analysis; see README.md "Running on macOS"). A standard distro
 # kernel (Ubuntu/Debian) already ships the Open vSwitch datapath module;
 # no custom kernel is needed on native Linux. Ollama is provisioned
 # automatically by `setup-ollama` (also invoked automatically when missing).

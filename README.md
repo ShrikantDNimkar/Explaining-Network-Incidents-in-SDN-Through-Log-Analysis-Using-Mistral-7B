@@ -170,6 +170,7 @@ project/             project scripts, recorded 30-run evidence and results
 
 | Symptom | Fix |
 |---|---|
+| `experiment` stops early on macOS (no Open vSwitch datapath) | current Docker Desktop versions dropped the kernel module: run the campaign on a Linux host and use `./group11 analysis` on the Mac (see "Running on macOS" above). |
 | `host kernel has no Open vSwitch datapath` | `sudo apt-get install -y linux-modules-extra-$(uname -r) openvswitch-switch` and re-run. |
 | Port 8181 or 2222 already in use | edit the `ports:` lines in `docker-compose.yml`. |
 | `Ollama is installed but still unreachable` | ensure `OLLAMA_HOST=0.0.0.0` (systemd override is at `/etc/systemd/system/ollama.service.d/override.conf`), restart Ollama, and check the firewall (`sudo ufw status`; Docker's bridge must be allowed). |
